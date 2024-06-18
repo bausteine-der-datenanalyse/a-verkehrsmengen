@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,7 +13,7 @@
 <meta name="author" content="Marc Fehr">
 <meta name="author" content="Maik Poetzsch">
 <meta name="author" content="Sebastian Seipel">
-<meta name="dcterms.date" content="2024-06-17">
+<meta name="dcterms.date" content="2024-06-18">
 
 <title>Auswertung von Verkehrsdaten</title>
 <style>
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 17, 2024</p>
+      <p class="date">June 18, 2024</p>
     </div>
   </div>
   
@@ -568,58 +568,32 @@ Mit Funktionen mehrere Datensätze einlesen
 <h3 data-number="1.6.3" class="anchored" data-anchor-id="schwerverkehr-anteile-über-die-jahre"><span class="header-section-number">1.6.3</span> Schwerverkehr-Anteile über die Jahre</h3>
 <p><strong>TO-DO</strong>: Erläuterungen</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Notiz für Matthias: Das hier ist eine frühe, nicht sonderlich gute Lösung, die ich aber noch behalte, bis ich mir überlegt habe wie ich die Erläuterung von Funktionen und Schleifen implementiere. Am ungeschicktesten ist das Benötigen des Extra-Ordners da momentan einfach nur nach csv-Dateien gefiltert wird.</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>list_of_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"data_jw"</span>,</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">recursive =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.csv$"</span>,</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(list_of_files, <span class="at">id =</span> <span class="st">"Jahr"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">'iso-8859-1'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>New names:
-• `` -&gt; `...255`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
-e.g.:
-  dat &lt;- vroom(...)
-  problems(dat)</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 24056 Columns: 256
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ";"
-chr  (37): DZ_Nr, DZ_Name, Land_Code, Str_Kl, Str_Zus, Erf_Art, Fernziel_Ri1...
-dbl (134): TK_Nr, Land_Nr, Str_Nr, Anz_Fs_Q, Betriebs_km, vT_MobisSo, vT_W, ...
-num  (81): DTV_Kfz_MobisSo_Q, DTV_Kfz_MobisSo_Ri1, DTV_Kfz_MobisSo_Ri2, DTV_...
-lgl   (3): TGMax2_SoFei_Ri1, TGMax2_SoFei_Ri2, ...255
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Jahr <span class="ot">&lt;-</span> <span class="fu">str_remove_all</span>(df<span class="sc">$</span>Jahr, <span class="st">"[data_jw/Jawe]"</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Jahr <span class="ot">&lt;-</span> <span class="fu">str_remove_all</span>(df<span class="sc">$</span>Jahr, <span class="st">"[.csv]"</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Jahr <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df<span class="sc">$</span>Jahr)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>df_NA <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DTV_Kfz_MobisSo_Q <span class="sc">!=</span> <span class="st">'NA'</span> <span class="sc">&amp;</span> DTV_SV_MobisSo_Q <span class="sc">!=</span> <span class="st">'NA'</span>)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>df_schwer <span class="ot">&lt;-</span> df_NA <span class="sc">|&gt;</span> </span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Jahr) <span class="sc">|&gt;</span> </span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">SV =</span> <span class="fu">sum</span>(DTV_SV_MobisSo_Q),<span class="at">Alle =</span> <span class="fu">sum</span>(DTV_Kfz_MobisSo_Q),<span class="at">Anteil =</span> (SV<span class="sc">/</span>Alle)<span class="sc">*</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Notiz für Matthias: Das hier ist eine frühe, nicht sonderlich gute Lösung, die ich aber noch behalte, bis ich mir überlegt habe wie ich die Erläuterung von Funktionen und Schleifen implementiere. Am ungeschicktesten ist das Benötigen des Extra-Ordners da momentan einfach nur nach csv-Dateien gefiltert wird.</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>list_of_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"data_jw"</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">recursive =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.csv$"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(list_of_files, <span class="at">id =</span> <span class="st">"Jahr"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">'iso-8859-1'</span>))</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Jahr <span class="ot">&lt;-</span> <span class="fu">str_remove_all</span>(df<span class="sc">$</span>Jahr, <span class="st">"[data_jw/Jawe]"</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Jahr <span class="ot">&lt;-</span> <span class="fu">str_remove_all</span>(df<span class="sc">$</span>Jahr, <span class="st">"[.csv]"</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Jahr <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df<span class="sc">$</span>Jahr)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>df_NA <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DTV_Kfz_MobisSo_Q <span class="sc">!=</span> <span class="st">'NA'</span> <span class="sc">&amp;</span> DTV_SV_MobisSo_Q <span class="sc">!=</span> <span class="st">'NA'</span>)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>df_schwer <span class="ot">&lt;-</span> df_NA <span class="sc">|&gt;</span> </span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Jahr) <span class="sc">|&gt;</span> </span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">SV =</span> <span class="fu">sum</span>(DTV_SV_MobisSo_Q),<span class="at">Alle =</span> <span class="fu">sum</span>(DTV_Kfz_MobisSo_Q),<span class="at">Anteil =</span> (SV<span class="sc">/</span>Alle)<span class="sc">*</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df_schwer, <span class="fu">aes</span>(<span class="at">x =</span> Jahr, <span class="at">y =</span> Anteil)) <span class="sc">+</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'identity'</span>, <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Jahr"</span>, <span class="at">y =</span> <span class="st">"Anteil am gesamten Verkehrsaufkommen"</span>) <span class="sc">+</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Anteil des Schwerverkehrs von 2003 bis 2018 in 1000"</span>) <span class="sc">+</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">2003</span>,<span class="dv">2018</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df_schwer, <span class="fu">aes</span>(<span class="at">x =</span> Jahr, <span class="at">y =</span> Anteil)) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'identity'</span>, <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Jahr"</span>, <span class="at">y =</span> <span class="st">"Anteil am gesamten Verkehrsaufkommen"</span>) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Anteil des Schwerverkehrs von 2003 bis 2018 in 1000"</span>) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">2003</span>,<span class="dv">2018</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -713,24 +687,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -765,11 +721,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

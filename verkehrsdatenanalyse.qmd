@@ -454,8 +454,9 @@ ggplot(data = data_schwer, aes(x = Wotag, y = avg_LKW_R1, group = Zählstelle, c
 **TO-DO**: Erläuterungen
 
 ```{r}
-# Notiz für Matthias: Das hier ist eine frühe, nicht sonderlich gute Lösung, die ich aber noch behalte, bis ich mir überlegt habe wie ich die Erläuterung von Funktionen und Schleifen implementiere. Am ungeschicktesten ist das Benötigen des Extra-Ordners da momentan einfach nur nach csv-Dateien gefiltert wird.
 #| warning: false
+
+#Notiz für Matthias: Das hier ist eine frühe, nicht sonderlich gute Lösung, die ich aber noch behalte, bis ich mir überlegt habe wie ich die Erläuterung von Funktionen und Schleifen implementiere. Am ungeschicktesten ist das Benötigen des Extra-Ordners da momentan einfach nur nach csv-Dateien gefiltert wird.
 
 list_of_files <- list.files(path = "data_jw",
                             recursive = TRUE,
