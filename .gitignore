@@ -1,2 +1,6 @@
 *_files/
 .Rhistory
+.Rproj.user
+.Rproj
+
+/.quarto/

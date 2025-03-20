@@ -1,0 +1,36 @@
+project:
+  type: book
+  output-dir: output/book/
+
+book:
+  title: "a-verkehrsdatenanalyse"
+  author:
+    - Lukas Arnold
+    - Simone Arnold
+    - Florian Bagemihl
+    - Matthias Baitsch
+    - Marc Fehr
+    - Maik Poetzsch
+    - Sebastian Seipel
+  date: today
+  language: de-DE
+  repo-url: "https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse"
+  repo-actions: [source]
+  favicon: "bilder/favicon_bcd_new.svg"
+  sidebar:
+    title: "Anwendungsbaustein Verkehrsdatenanalyse"
+    logo: "bilder/logo_bcd_new.svg"
+  chapters:
+    - index.qmd
+    - aufgabenstellung/aufgabe_verkehrsdatenanalyse.qmd
+    - musterloesung/musterloesung.qmd
+    - verkehrsdatenanalyse.qmd
+
+format:
+  html:
+    theme: cosmo
+    lang: de
+    toc: true
+    toc-depth: 3
+
+

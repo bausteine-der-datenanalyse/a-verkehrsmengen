@@ -2,25 +2,238 @@
 title: "Musterlösung Verkehrsdatenanalyse"
 format: 
   html:
-    toc: false
+    toc: true
     number-sections: true
     colorlinks: true
   pdf:
     toc: false
     number-sections: true
     colorlinks: true
-editor: visual
-author:
-  - Lukas Arnold
-  - Simone Arnold
-  - Florian Bagemihl
-  - Matthias Baitsch
-  - Marc Fehr
-  - Maik Poetzsch
-  - Sebastian Seipel
-date: today # "2024-03-05" Jahr-Monat-Tag / year-month-day
 ---
+
+```{{r}}
+#| include: false
+library(ggplot2)
+library(tidyverse)
+library(lubridate)
+library(readxl)
+library(kableExtra)
+library(sf)
+library(osmdata)
+library(giscoR)
+```
 
 ## Aufgabe 1
 
-Platzhalter
+### a) Tagesganglinien
+
+#### Tagesganglinie einer Zählstelle
+
+*Daten einlesen und verarbeiten*
+
+```{{r}}
+#| warning: false
+ZST5116 <- read_csv2("data/zst5116_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+```
+
+```{{r}}
+#| warning: false
+ZST5116_DTV <- ZST5116 |> 
+  group_by(Stunde, Wotag) |> 
+  summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
+
+ ZST5116_DTV$Wochentag <- factor(ZST5116_DTV$Wotag,
+  levels = c(1,2,3,4,5,6,7),
+  labels = c("Mo","Di","Mi","Do","Fr","Sa","So"))
+```
+
+*Plotten* 
+
+```{{r}}
+#| warning: false
+
+ggplot(data = ZST5116_DTV, aes(x = Stunde, y = avg_KFZ_R1 ,group = Wochentag ,color = factor(Wochentag), shape = Wochentag)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Tagesganglinien Zählstelle 5116 Richtung 1",
+       x = "Stunde",
+       y = "Verkehrsaufkommen Richtung 1 in Kfz/h",
+       color = "Wochentag",
+      shape = "Wochentag") +
+  theme_light()
+ 
+```
+
+#### Tagesganglinie von vier Zählstellen
+
+*Daten einlesen und verarbeiten*
+
+```{{r}}
+#| warning: false
+ZST5113 <- read_csv2("data/zst5113_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+ZST5116 <- read_csv2("data/zst5116_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+ZST5125 <- read_csv2("data/zst5125_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+ZST5128 <- read_csv2("data/zst5128_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+```
+
+```{{r}}
+all_data <- bind_rows(list(ZST5113,ZST5116,ZST5125,ZST5128), .id = "Zählstelle")
+
+all_data$Zählstelle <- factor(all_data$Zählstelle, levels = c("1", "2", "3", "4"), labels = c("Bochum", "Wanne-Eickel", "Waltrop-Brambauer", "Wenden-Dahl"))
+
+all_data$Wotag <- factor(all_data$Wotag,
+ levels = c(1,2,3,4,5,6,7),
+ labels = c("Mo","Di","Mi","Do","Fr","Sa","So"))
+```
+
+```{{r}}
+data_werktag <- all_data |>
+  filter(Fahrtzw == "w", Wotag %in% c("Di", "Mi", "Do"))
+
+data_werktag_mean <- data_werktag |>
+  group_by(Stunde, Wotag) |>
+  summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
+```
+
+*Plotten*
+```{{r}}
+ggplot(data = data_werktag_mean, aes(x = Stunde, y = avg_KFZ_R1, group = Wotag, color = Wotag)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Verkehrsaufkommen mittlerer Werktage Zählstelle 5116 R1",
+       x = "Stunde",
+       y = "KFZ_R1",
+       color = "Wotag") +
+  theme_light()
+```
+
+### b) 50. Stunde
+
+Stunde auswählen:
+
+```{{r}}
+ZST5116_50 <- ZST5116 |> 
+    arrange(desc(KFZ_R1)) |>
+    slice(50) |>
+  select(Datum,Wotag,Stunde,KFZ_R1)
+```
+
+Als Tabelle:
+
+```{{r}}
+kable(ZST5116_50)
+```
+
+Geeignete Darstellungsform:
+
+```{{r}}
+# Erstellen des Streudiagramms für den stündlichen DTV Zählstelle 5116 Richtung 1
+ZST5116_top <- ZST5116 |>
+  arrange(desc(KFZ_R1))
+
+ZST5116_top$Nummer = 1:nrow(ZST5116_top)
+```
+
+```{{r}}
+ggplot(data = ZST5116_top[1:80, ], aes(x = Nummer,y = KFZ_R1, fill = Nummer == 50, width = .65)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Verkehrsaufkommen pro Stunde Zählstelle 5116 Richtung 1",
+       x = "Sortierte Topstunde",
+       y = "Verkehrsaufkommen in Kfz/h",
+       legend = "Wochentag") +
+  scale_fill_manual(values = c("grey", "red"), guide = "none") +
+  geom_label(
+    data = filter(ZST5116_top,Nummer == 50), 
+    mapping = aes(label = KFZ_R1),
+    nudge_y = 200, size = 4.5, alpha = 0.5
+  ) +
+  theme_light()
+```
+
+### c) Schwerverkehr
+
+Daten einlesen und filtern:
+
+```{{r}}
+#| warning: false
+
+list_of_files <- list.files(path = "data_jw",
+                            recursive = TRUE,
+                            pattern = "\\.csv$",
+                            full.names = TRUE)
+
+df <- readr::read_csv2(list_of_files, id = "Jahr", locale = locale(encoding = 'iso-8859-1'))
+df$Jahr <- str_remove_all(df$Jahr, "[data_jw/Jawe]")
+df$Jahr <- str_remove_all(df$Jahr, "[.csv]")
+df$Jahr <- as.numeric(df$Jahr)
+
+df_NA <- df |>
+  filter(DTV_Kfz_MobisSo_Q != 'NA' & DTV_SV_MobisSo_Q != 'NA')
+
+df_schwer <- df_NA |> 
+  group_by(Jahr) |> 
+  summarise(SV = sum(DTV_SV_MobisSo_Q),Alle = sum(DTV_Kfz_MobisSo_Q),Anteil = (SV/Alle)*100)
+```
+
+Plotten:
+
+```{{r}}
+ggplot(data = df_schwer, aes(x = Jahr, y = Anteil)) +
+  geom_bar(stat='identity', fill = "blue") +
+  labs(x = "Jahr", y = "Anteil am gesamten Verkehrsaufkommen") +
+  ggtitle("Anteil des Schwerverkehrs von 2003 bis 2018 in 1000") +
+  scale_x_continuous(breaks=seq(2003,2018,1)) +
+ theme_light()
+```
+
+## Aufgabe 2
+
+Deutschlandkarte:
+
+```{{r}}
+d_de <- gisco_get_nuts(country = "Germany", nuts_level = 0, resolution = 03)
+```
+
+Autobahnnetz:
+
+```{{r}}
+if (!file.exists("data/d_bab.RData")) {
+  q <- opq(bbox = getbb("Deutschland", featuretype = "country"), timeout = 600)
+  d_bab_raw <- (add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf())$osm_lines
+  d_bab <- d_bab_raw |>
+    filter(st_contains(d_de, d_bab_raw, sparse = FALSE)[1,]) |>
+    drop_na(ref) |>
+    group_by(ref) |>
+    summarise() |>
+    st_simplify(dTolerance = 100) 
+  save(d_bab, d_bab_raw, file = "data/bab.RData")
+} else {
+  load(file = "data/d_bab.RData")
+}
+```
+
+Zählstellendaten für 2022:
+
+```{{r}}
+#| warning: false
+
+d_Jawe <- read_csv2("data/Jawe2022.csv", locale = locale(encoding = 'iso-8859-1'))
+```
+
+```{{r}}
+d_JaweNA <- d_Jawe |>
+  filter(Str_Kl == "A") |>
+  drop_na(DTV_Kfz_MobisSo_Q) |>
+  arrange(DTV_Kfz_MobisSo_Q)
+```
+
+Alle Elemente zusammen plotten:
+
+```{{r}}
+ggplot() +
+  geom_sf(data = d_de, fill = NA, size = 0.5) +
+  geom_sf(data = d_bab,  size = 0.35, show.legend = FALSE) +
+  geom_point(data = d_JaweNA, mapping = aes(x = Koor_WGS84_E, y = Koor_WGS84_N, color = DTV_Kfz_MobisSo_Q), size = 1.5, na.rm = FALSE) + 
+  scale_color_distiller(palette = 8 , direction = 1) +
+  theme_void()
+```

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,9 +13,8 @@
 <meta name="author" content="Marc Fehr">
 <meta name="author" content="Maik Poetzsch">
 <meta name="author" content="Sebastian Seipel">
-<meta name="dcterms.date" content="2024-06-18">
 
-<title>Auswertung von Verkehrsdaten</title>
+<title>3&nbsp; Ausführliche Erläuterung der Musterlösung – a-verkehrsdatenanalyse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -41,7 +40,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -65,30 +64,131 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="verkehrsdatenanalyse_files/libs/clipboard/clipboard.min.js"></script>
-<script src="verkehrsdatenanalyse_files/libs/quarto-html/quarto.js"></script>
-<script src="verkehrsdatenanalyse_files/libs/quarto-html/popper.min.js"></script>
-<script src="verkehrsdatenanalyse_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="verkehrsdatenanalyse_files/libs/quarto-html/anchor.min.js"></script>
-<link href="verkehrsdatenanalyse_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="verkehrsdatenanalyse_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="verkehrsdatenanalyse_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="verkehrsdatenanalyse_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="verkehrsdatenanalyse_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./musterloesung/musterloesung.html" rel="prev">
+<link href="./bilder/favicon_bcd_new.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
 
 
 </head>
 
-<body>
+<body class="nav-sidebar floating fullcontent">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="verkehrsdatenanalyse.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./verkehrsdatenanalyse.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ausführliche Erläuterung der Musterlösung</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./bilder/logo_bcd_new.svg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Anwendungsbaustein Verkehrsdatenanalyse</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Präambel</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./aufgabenstellung/aufgabe_verkehrsdatenanalyse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Aufgaben zur Verkehrsdatenanalyse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./musterloesung/musterloesung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Musterlösung Verkehrsdatenanalyse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./verkehrsdatenanalyse.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ausführliche Erläuterung der Musterlösung</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Auswertung von Verkehrsdaten</h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ausführliche Erläuterung der Musterlösung</span></h1>
 </div>
 
 
@@ -96,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-heading">Autor:innen</div>
     <div class="quarto-title-meta-contents">
              <p>Lukas Arnold </p>
              <p>Simone Arnold </p>
@@ -109,9 +209,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
     
     <div>
-    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 18, 2024</p>
+      <p class="date">20. März 2025</p>
     </div>
   </div>
   
@@ -138,32 +238,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="verkehrsdatenanalyse" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Verkehrsdatenanalyse</h1>
+<section id="verkehrsdatenanalyse" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Verkehrsdatenanalyse</h1>
 <p>In diesem Baustein werden Aspekte der Verkehrsdatenanalyse wie Tagesganglinien, Zählstellendatenauswertung in Kartendarstellung und die Bestimmung der 50. Stunde behandelt.</p>
-<section id="voraussetzungen" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="voraussetzungen"><span class="header-section-number">1.1</span> Voraussetzungen</h2>
+<section id="voraussetzungen" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="voraussetzungen"><span class="header-section-number">4.1</span> Voraussetzungen</h2>
 <p>Zum erfolgreichen Bearbeiten dieses Anwendungsbausteins benötigen Sie die Inhalte des Methodenbausteins Grundlagen der Statistik [Referenz] und des Werkzeugbausteins Datenmanagements [Referenz]</p>
 </section>
-<section id="lernziele" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="lernziele"><span class="header-section-number">1.2</span> Lernziele</h2>
+<section id="lernziele" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="lernziele"><span class="header-section-number">4.2</span> Lernziele</h2>
 <p>Ziel dieses Bausteins ist es, typische Inhalte von verkehrsrelevanten Fragestellungen in grafischer Form mithilfe der Programmiersprache R darzustellen. Dabei lernen Sie wo deutschsprachige Verkehrsdaten gefunden werden können, wie Verkehrsdaten von Dauerzählstellen auf Autobahnen eingelesen und analysiert werden und welche verschiedenen Darstellungsformen sich für bestimmte Datentypen eignen.</p>
 </section>
-<section id="deutschlandkarte-mit-zählstellendaten" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="deutschlandkarte-mit-zählstellendaten"><span class="header-section-number">1.3</span> Deutschlandkarte mit Zählstellendaten</h2>
+<section id="deutschlandkarte-mit-zählstellendaten" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="deutschlandkarte-mit-zählstellendaten"><span class="header-section-number">4.3</span> Deutschlandkarte mit Zählstellendaten</h2>
 <p>Als ersten Schritt interessieren uns besonders stark befahrene Streckenabschnitte von Autobahnen und wir wollen diese in einer Deutschlandkarte darstellen. Wir gehen hierbei schrittweise vor:</p>
 <ol type="1">
 <li>Erstellung einer Deutschlandkarte.</li>
 <li>Hinzufügen des Autobahnnetzes in die Deutschlandkarte.</li>
 <li>Die Daten der Zählstellen in die Deutschlandkarte plotten.</li>
 </ol>
-<section id="sec-deutschlandkarte" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="sec-deutschlandkarte"><span class="header-section-number">1.3.1</span> Deutschlandkarte</h3>
+<section id="sec-deutschlandkarte" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="sec-deutschlandkarte"><span class="header-section-number">4.3.1</span> Deutschlandkarte</h3>
 <p>Wie in [Videoquelle] benötigen wir für die Erstellung einer Deutschlandkarte die Pakete <code>giscoR</code> (<a href="https://ropengov.github.io/giscoR/" class="uri">https://ropengov.github.io/giscoR/</a>), <code>sf</code> (<a href="https://r-spatial.github.io/sf/" class="uri">https://r-spatial.github.io/sf/</a>) und <code>ggplot2</code> (<a href="https://ggplot2.tidyverse.org/" class="uri">https://ggplot2.tidyverse.org/</a>).</p>
 <p>Mithilfe des Pakets <code>giscoR</code> werden geografische Informationen abgerufen, die mithilfe von <code>sf</code> in <code>ggplot2</code> dargestellt werden können.</p>
 <p>Mit dem Befehl <code>gisco_get_nuts()</code> werden NUTS-Regionen als <code>sf</code> (simple feature) Polygone, Punkte und Linien ausgegeben. Wir interessieren uns für die deutschen Grenzen (<code>nuts_level = 0</code>) und wollen diese als Datensatz speichern.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>d_de <span class="ot">&lt;-</span> <span class="fu">gisco_get_nuts</span>(<span class="at">country =</span> <span class="st">"Germany"</span>, <span class="at">nuts_level =</span> <span class="dv">0</span>, <span class="at">resolution =</span> <span class="dv">03</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>d_de <span class="ot">&lt;-</span> <span class="fu">gisco_get_nuts</span>(<span class="at">country =</span> <span class="st">"Germany"</span>, <span class="at">nuts_level =</span> <span class="dv">0</span>, <span class="at">resolution =</span> <span class="dv">03</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Die verwendeten Elemente lassen sich in drei Abschnitte unterteilen:</p>
 <ol type="1">
@@ -176,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Zur ersten Überprüfung, ob dieser Schritt entsprechend unserer Erwartung funktioniert hat, können wir mithilfe des Datensatzes bereits mit <code>ggplot2</code> plotten. Dafür leiten wir die erstellten <em>simple features</em> an <code>ggplot2</code> weiter und visualisieren diese mit der Funktion <code>geom_sf()</code>. Diese Funktion arbeitet nach dem bekannten Muster aus Kapitel [Referenz]. Als zusätzliche Option geben wir mit <code>fill = NA</code> an, dass die Deutschlandkarte nicht farblich eingefärbt werden soll.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> d_de, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">size =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> d_de, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">size =</span> <span class="fl">0.5</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -187,16 +287,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Wir sehen, dass dies eine funktionierende Deutschlandkarte darstellt. In den weiteren Schritten schauen wir uns an, wie wir weitere Informationen in diese Karte hinzufügen.</p>
 </section>
-<section id="sec-autobahnverlauf" class="level3" data-number="1.3.2">
-<h3 data-number="1.3.2" class="anchored" data-anchor-id="sec-autobahnverlauf"><span class="header-section-number">1.3.2</span> Autobahnverlauf</h3>
+<section id="sec-autobahnverlauf" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="sec-autobahnverlauf"><span class="header-section-number">4.3.2</span> Autobahnverlauf</h3>
 <p>Wie in [Videoquelle] benötigen wir für die Erstellung des Autobahnverlaufs das Paket <code>osmdata</code><a href="https://cran.r-project.org/web/packages/osmdata/vignettes/osmdata.html" class="uri">https://cran.r-project.org/web/packages/osmdata/vignettes/osmdata.html</a>. Dieses Paket verwendet Daten auf Grundlage von <a href="https://www.openstreetmap.org/"><em>Open Street Map</em></a>.</p>
 <p>Um nur die Daten aus Deutschland zu verwenden, müssen wir zuerst eine Anfrage (engl. <em>query</em>) mit der <a href="https://wiki.openstreetmap.org/wiki/DE:Bounding_Box"><em>Bounding Box</em></a> Deutschland erstellen. Die Funktion <code>opq()</code> erstellt die Anfrage und die Funktion <code>getbb()</code> legt den Koordinatenbereich der <em>Bounding Box</em> fest. Wir interessieren uns für <code>"Deutschland"</code> und müssen noch spezifieren, dass wir uns für das Land als Merkmal (<code>featuretype = "country"</code>) interessieren. Diese Anfrage speichern wir als Objekt zur späteren Verwendung ab. Da dieser Prozess länger dauern kann, ist es hilfreich mit <code>timeout = 600</code> zu spezifizieren, dass dieser Befehl nach 600 Sekunden aufhört, sollte die Ausführung diese Zeit in Anspruch nehmen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  q <span class="ot">&lt;-</span> <span class="fu">opq</span>(<span class="at">bbox =</span> <span class="fu">getbb</span>(<span class="st">"Deutschland"</span>, <span class="at">featuretype =</span> <span class="st">"country"</span>), <span class="at">timeout =</span> <span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  q <span class="ot">&lt;-</span> <span class="fu">opq</span>(<span class="at">bbox =</span> <span class="fu">getbb</span>(<span class="st">"Deutschland"</span>, <span class="at">featuretype =</span> <span class="st">"country"</span>), <span class="at">timeout =</span> <span class="dv">600</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nun können wir unserer Anfrage Objekte mit der Funktion <code>add_osm_feature()</code> hinzufügen. Mit den Spezifikationen <code>key</code> für die Kategorie und <code>value</code> für die genauen Objekte wird festgelegt, welche Arten von Objekten der Anfrage hinzugefügt werden. In unserem Fall interessieren uns nur die Autobahnen: Ein Blick in die <a href="https://wiki.openstreetmap.org/wiki/Map_features#Highway">Dokumentation von Open Street Map</a> zeigt uns, dass wir <code>key = "highway"</code> und <code>value = "motorway"</code> benötigen. Dies leiten wir nun an die Funktion <code>osmdata_sf()</code> weiter, damit unsere Anfrage im <em>simple feature</em>-Format weiterverarbeitet wird. Wir verwenden nur die <code>osm_lines</code> und nicht die anderen Objekte wie <code>osm_points</code> und <code>osm_polygons</code>. Diesen Datensatz speichern wir als <code>d_bab_raw</code> .</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  d_bab_raw <span class="ot">&lt;-</span> (<span class="fu">add_osm_feature</span>(q, <span class="at">key =</span> <span class="st">"highway"</span>, <span class="at">value =</span> <span class="st">"motorway"</span>) <span class="sc">|&gt;</span> <span class="fu">osmdata_sf</span>())<span class="sc">$</span>osm_lines</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  d_bab_raw <span class="ot">&lt;-</span> (<span class="fu">add_osm_feature</span>(q, <span class="at">key =</span> <span class="st">"highway"</span>, <span class="at">value =</span> <span class="st">"motorway"</span>) <span class="sc">|&gt;</span> <span class="fu">osmdata_sf</span>())<span class="sc">$</span>osm_lines</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Diese Daten müssen nun noch weiter aufbereitet werden. Dabei handelt es sich um den schwierigsten Schritt in diesem Baustein: Ein Blick in den Datensatz zeigt, dass dort viele für unseren Fall uninteressante Variablen und einige nicht vorhandene Werte vorliegen. Außerdem werden die Autobahnen über die deutschen Grenzen hinaus dargestellt, wir interessieren uns aber momentan nur für die Werte in Deutschland.</p>
 <p>Um nur den Autobahnverlauf in Deutschland dazustellen benötigen wir einen Filter mit <code>filter()</code>. Als Element des Filters verwenden wir die Funktion <code>st_contains()</code> aus dem Paket <code>sf</code> und fügen unsere Datensätze <code>d_de</code> und <code>d_bab_raw</code> ein, sodass nur die Werte aus <code>d_bab_raw</code> übernommen werden, die sich in <code>d_de</code> befinden. Zusätzlich geben wir mit <code>sparse = FALSE</code> an, dass kein “sparse index” ausgegeben werden soll. Mit <code>drop_na(ref)</code> werden alle Reihen exkludiert, die einen nicht vorhandenen (<em>NA</em> englisch für <em>not available</em>) Wert für die Variable <code>ref</code> besitzen. Die Variable <code>ref</code> stellt die Bezeichnung der jeweiligen Autobahn da. Wir wollen also alle Objekte, die nicht zugeordnet werden entfernen.Mit <code>group_by(ref)</code> und <code>summarise()</code> wird der Datensatz nach der <code>ref</code>-Variable gruppiert und alle Reihen mit demselben Wert werden zusammengefasst. Zuletzt verwenden wir <code>st_simplify()</code> um den Autobahnverlauf zu vereinfachen und nicht jeden Eckpunkt darzustellen. Mit <code>dTolerance =</code> stellen wir den Toleranzparameter für unsere Vereinfachung in Metern ein (in unserem Fall beträgt dies 100 Meter). Diesen Datensatz speichern wir als <code>d_bab</code> ab.</p>
@@ -209,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(ref) <span class="sc">|&gt;</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>() <span class="sc">|&gt;</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_simplify</span>(<span class="at">dTolerance =</span> <span class="dv">100</span>) </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">save</span>(d_bab, d_bab_raw, <span class="at">file =</span> <span class="st">"data/bab.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">save</span>(d_bab, d_bab_raw, <span class="at">file =</span> <span class="st">"data/bab.RData"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Rechenleistung und Zeit einsparen">
 <div class="callout-header d-flex align-content-center">
@@ -235,7 +335,7 @@ Rechenleistung und Zeit einsparen
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">save</span>(d_bab, d_bab_raw, <span class="at">file =</span> <span class="st">"data/bab.RData"</span>)</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">load</span>(<span class="at">file =</span> <span class="st">"data/d_bab.RData"</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -243,7 +343,7 @@ Rechenleistung und Zeit einsparen
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> d_de, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> d_bab,  <span class="at">size =</span> <span class="fl">0.35</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> d_bab,  <span class="at">size =</span> <span class="fl">0.35</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -253,11 +353,11 @@ Rechenleistung und Zeit einsparen
 </div>
 </div>
 </section>
-<section id="sec-zählstellendaten" class="level3" data-number="1.3.3">
-<h3 data-number="1.3.3" class="anchored" data-anchor-id="sec-zählstellendaten"><span class="header-section-number">1.3.3</span> Zählstellendaten</h3>
+<section id="sec-zählstellendaten" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="sec-zählstellendaten"><span class="header-section-number">4.3.3</span> Zählstellendaten</h3>
 <p>Zuguterletzt fügen wir die tatsächlichen Verkehrsdaten zu unserer Darstellung hinzu. Wir verwenden hier die Daten von Dauerzählstellen auf Autobahnen, die die Bundesanstalt für Straßenwesen (BASt) <a href="https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html">online</a> zur Verfügung stellt. Die heruntergeladene CSV-Datei importieren wir mithilfe der <code>read_csv2()</code>-Funktion des Pakets <code>readr</code> aus der Paketsammlung <code>tidyverse</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>d_Jawe <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"data/Jawe2022.csv"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">'iso-8859-1'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>d_Jawe <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"data/Jawe2022.csv"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">'iso-8859-1'</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Durch <code>locale = locale(encoding = 'iso-8859-1')</code> bestimmen wir die Kodierung nach der ISO-Norm 8859-1, damit die Datei auch in anderen Systemen geladen werden kann. Danach müssen wir den Datensatz aufbereiten (siehe [Referenz]) und für unseren Zweck relevante Daten filtern (siehe [Referenz]). Dazu benötigen wir die ebenfalls online verfügbare <a href="https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/pdf-dateien/DZ-Abkuerzungen-Beschreibung.pdf?__blob=publicationFile&amp;v=11">Datensatzbeschreibung der BAST.</a></p>
 <p>Dort sehen wir, dass die Variable <code>Str_Kl</code> die Straßenklasse beschreibt. Diese Variable hat die Ausprägungen “A” für Autobahnen und “B” für Bundesstraßen. In unserem Fall interessieren uns nur die Daten für Autobahnen, also die Ausprägung “A”. Dies können wir mit <code>filter(Str_Kl == "A")</code> erreichen.</p>
@@ -267,7 +367,7 @@ Rechenleistung und Zeit einsparen
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d_JaweNA <span class="ot">&lt;-</span> d_Jawe <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Str_Kl <span class="sc">==</span> <span class="st">"A"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(DTV_Kfz_MobisSo_Q) <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(DTV_Kfz_MobisSo_Q)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(DTV_Kfz_MobisSo_Q)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nun können wir alle Elemente kombinieren: Wir plotten nun also die Deutschlandkarte, die Karte des Autobahnverlaufs und die Daten der Zählstellen in eine Grafik. Ebenfalls in der Datensatzbeschreibung können wir die Variablen für die Länge (<code>Koor_WGS84_E</code>) und Breite (<code>Koor_WGS84_N</code>) der Lagekoordinaten in WGS84 für die jeweilige Zählstelle finden. Diese Werte setzen wir als x-Koordinate und y-Koordinate ein.</p>
 <p>Um die Darstellung zu verschönern, verwenden wir einige zusätzliche Optionen von <code>ggplot2</code>. <code>scale_color_distiller</code> ist Teil der Farbpalette <a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">“brewer”</a>, entwickelt von Cynthia Brewer. Mit <code>palette = 8</code> benutzen wir in unserem Fall die 8. Palette und <code>direction = 1</code> invertiert die Skala, damit hohe Werte dunkler dargestellt werden und niedrige Werte heller. Mit <code>theme_void</code> sorgen wir dafür, dass <code>ggplot</code>-Thema komplett leer ist, wir also keine Achsen, Achsenbeschriftungen, Hintergründe oder Gitternetzlinien in unserer Grafik sehen.</p>
@@ -277,7 +377,7 @@ Rechenleistung und Zeit einsparen
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> d_bab,  <span class="at">size =</span> <span class="fl">0.35</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> d_JaweNA, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Koor_WGS84_E, <span class="at">y =</span> Koor_WGS84_N, <span class="at">color =</span> DTV_Kfz_MobisSo_Q), <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">na.rm =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_distiller</span>(<span class="at">palette =</span> <span class="dv">8</span> , <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -288,16 +388,16 @@ Rechenleistung und Zeit einsparen
 </div>
 </section>
 </section>
-<section id="sec-tagesganglinien" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="sec-tagesganglinien"><span class="header-section-number">1.4</span> Tagesganglinien</h2>
+<section id="sec-tagesganglinien" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-tagesganglinien"><span class="header-section-number">4.4</span> Tagesganglinien</h2>
 <p>Als weitere wichtige Größe in der Verkehrsdatenanalyse schauen wir uns die Tagesganglinien an. Dazu benötigen wir die Daten einer Zählstelle für jeden Tag. Eine Auflistung der Zählstellen und ihres Datensatzes findet sich ebenfalls auf der <a href="https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html?nn=1819490&amp;cms_strTyp=A&amp;cms_map=0">Seite der BASt.</a></p>
 <p>Exemplarisch verwenden wir hier die Zählstelle 5116 der A42 in Wanne-Eickel. Diese Daten müssen wir zuerst einlesen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ZST5116 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"data/zst5116_2022.csv"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">'iso-8859-1'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ZST5116 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"data/zst5116_2022.csv"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">'iso-8859-1'</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Auch hier hilft es, sich die <a href="https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/pdf-dateien/datensatzbeschreibung-Stundendaten.pdf?__blob=publicationFile&amp;v=4">Datensatzbeschreibung der BAST</a> anzuschauen.</p>
-<section id="sec-tagesganglinien-einzeln" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="sec-tagesganglinien-einzeln"><span class="header-section-number">1.4.1</span> Tagesganglinien für einzelne Wochentage</h3>
+<section id="sec-tagesganglinien-einzeln" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="sec-tagesganglinien-einzeln"><span class="header-section-number">4.4.1</span> Tagesganglinien für einzelne Wochentage</h3>
 <p>Wir wollen nun die Tagesganglinien der ausgewählten Zählstelle für jeden Wochentag erstellen. Wir brauchen also Mittelwerte für jede Stunde jedes Wochentages. Dazu benötigen wir das Paket <code>dplyr</code> aus der Paketsammlung <code>tidyverse</code>.</p>
 <p>Mithilfe der Funktion <code>group_by()</code> können wir unseren Datensatz nach Variablen gruppieren. Für unseren Fall sind dies die Variablen <code>Stunde</code> für die Erhebungsstunde und <code>Wotag</code> für den Wochentag.</p>
 <p>Danach leiten wir diese Werte an die <code>summarise()</code>-Funktion weiter. Diese gibt für jede Kombination der Gruppierungsvariable eine Reihe aus. Dazu benötigen wir für Kombination ebenfalls die Mittelwerte für beide Fahrtrichtungen (<code>KFZ_R1</code> und <code>KFZ_R2</code>). Diesen Datensatz speichern wir als neues Element <code>ZST5116_DTV</code>. Für die weitere Verwendung bietet es sich an, die Variable <code>Wotag</code> mit <code>factor ()</code> in einen Faktor umzuwandeln und die Ebenen des Faktors (<code>levels =</code>) korrekt nach den Wochentagen zu benennen (<code>labels =</code>).</p>
@@ -306,9 +406,9 @@ Rechenleistung und Zeit einsparen
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Stunde, Wotag) <span class="sc">|&gt;</span> </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_KFZ_R1 =</span> <span class="fu">mean</span>(KFZ_R1),<span class="at">avg_KFZ_R2 =</span> <span class="fu">mean</span>(KFZ_R2))</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ZST5116_DTV<span class="sc">$</span>Wochentag <span class="ot">&lt;-</span> <span class="fu">factor</span>(ZST5116_DTV<span class="sc">$</span>Wotag,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a> <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>),</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a> <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Mo"</span>,<span class="st">"Di"</span>,<span class="st">"Mi"</span>,<span class="st">"Do"</span>,<span class="st">"Fr"</span>,<span class="st">"Sa"</span>,<span class="st">"So"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a> ZST5116_DTV<span class="sc">$</span>Wochentag <span class="ot">&lt;-</span> <span class="fu">factor</span>(ZST5116_DTV<span class="sc">$</span>Wotag,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Mo"</span>,<span class="st">"Di"</span>,<span class="st">"Mi"</span>,<span class="st">"Do"</span>,<span class="st">"Fr"</span>,<span class="st">"Sa"</span>,<span class="st">"So"</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nun können wir diese Daten (exemplarisch hier Fahrtrichtung 1 mit <code>KFZ_R1</code>) in <code>ggplot2</code> verwenden. Wir wollen für eine Tagesganglinie nun für jede Stunde einen Datenpunkt darstellen und diese mit einer Linie verbinden.</p>
 <p>Zuerst erstellen wir mit <code>ggplot()</code> unsere Umgebung zum Erstellen von Grafiken. Da wir wie angesprochen zwei Formen (Datenpunkte und Linien) verwenden, bietet es sich an, die Einstellungen wie der verwendete Datensatz und die verwendeten Variablen global in <code>ggplot()</code> und nicht bei den einzelnen Elementen festzulegen. Dazu legen wir mit <code>data = ZST5116_DTV</code> den neu erstellten Datensatz als Datensatz fest. Mit <code>aes()</code> legen wir fest, wie Variablen visuelle Eigenschaften zugeordnet werden. Mit <code>x = Stunde</code> und <code>y = avg_KFZ_R1</code> bestimmen wir, dass die Stunde auf der X-Achse abgetragen wird und unsere neu erstellten Mittelwerte auf der y-Achse. Wir wollen unsere Daten aber noch nach Wochentagen aufteilen und einfärben und dies geschieht mit <code>group = Wochentag</code> und <code>color = factor(Wochentag)</code>. All diese Eigenschaften werden an nachfolgende <em>geoms</em> “weitervererbt”. Mit <code>geom_point</code> fügen wir die Datenpunkte hinzu und mit <code>geom_line</code> die Linie. Die Zusatzoptionen <code>size = 2</code> und <code>linewidth = 1</code> verändern die Größe der Elemente und dienen der Ästhetik, sind aber natürlich persönliche Präferenz. Zuguterletzt beschriften wir mit <code>labs()</code> unsere Grafik. Dazu ändern wir mit <code>title =</code> den Titel, mit <code>x =</code> und <code>y =</code> die Beschriftung der jeweiligen Achse und mit <code>color =</code> die Legende für die Farben.</p>
@@ -323,7 +423,7 @@ Rechenleistung und Zeit einsparen
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Verkehrsaufkommen Richtung 1 in Kfz/h"</span>,</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Wochentag"</span>,</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">shape =</span> <span class="st">"Wochentag"</span>) <span class="sc">+</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -334,20 +434,20 @@ Rechenleistung und Zeit einsparen
 </div>
 </section>
 </section>
-<section id="sec-50stunde" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="sec-50stunde"><span class="header-section-number">1.5</span> 50. Stunde</h2>
+<section id="sec-50stunde" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="sec-50stunde"><span class="header-section-number">4.5</span> 50. Stunde</h2>
 <p>Als einen weiteren wichtigen Kennwert schauen wir uns das Verkehrsaufkommen in der 50. Stunde an. Für eine rein deskriptive Beschreibung der 50. Stunden können wir den Datensatz absteigend sortieren und dann den 50. Wert auswählen. Dazu benutzen wir erneut die <code>arrange()</code>-Funktion, dieses Mal aber mit dem Zusatz <code>desc()</code>(kurz für englisch <em>descending</em> = absteigend). Um eine Reihe anhand der Position auszuwählen, verwenden wir den <code>slice()</code>-Befehl. Dies leiten wir nun an die <code>select()</code>-Funktion weiter, die es uns ermöglicht anhand des Namens auszuwählen, welche Variablen wir für unsere Darstellung behalten möchten. In diesem Fall wählen wir das Datum (<code>Datum</code>), den Wochentag (<code>Wotag</code>), die Stunde des Tages (<code>Stunde</code>) und den tatsächlichen Verkehrswert (<code>KFZ_R1</code>) aus.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ZST5116_50 <span class="ot">&lt;-</span> ZST5116 <span class="sc">|&gt;</span> </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(KFZ_R1)) <span class="sc">|&gt;</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">50</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Datum,Wotag,Stunde,KFZ_R1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Datum,Wotag,Stunde,KFZ_R1)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Mit der Funktion <code>kable()</code> aus dem Paket <code>kableExtra</code> können wir dies nun tabellarisch darstellen. Wir sehen, dass es sich um Freitag (Wotag 5), den 11. Februar (Datum 220211) in der 14. Stunde handelt und in diesem zeitraum 3173 KFZ erfasst wurden.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(ZST5116_50)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(ZST5116_50)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;">Datum</th>
@@ -374,7 +474,7 @@ Rechenleistung und Zeit einsparen
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ZST5116_top <span class="ot">&lt;-</span> ZST5116 <span class="sc">|&gt;</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(KFZ_R1))</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>ZST5116_top<span class="sc">$</span>Nummer <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(ZST5116_top)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>ZST5116_top<span class="sc">$</span>Nummer <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(ZST5116_top)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nun können wir unsere Säulendiagramme plotten: Um nicht alle (in unserem Fall 8760) Beobachtungen zu plotten, wird der zu plottende Datensatz mithilfe von dem Zusatz <code>[1:80,]</code> bei der Festlegung des Datensatzes auf die ersten 80 Beobachtungen reduziert. Es bietet sich an , die 50. Stunde farblich hervorzuheben und mit einem Label zu versehen.</p>
 <p>Dazu verwenden wir einen logischen Operator mit <code>fill = Nummer == 50</code> und können dann mit <code>scale_fill_manual()</code> das Aussehen festlegen. Durch das Einfügen von <code>values = c("black", "red")</code> bestimmen wir, dass für den Fall dass der Operator stimmt ( also die 50. Stunde), die Farbe rot verwendet wird, andernfalls die Farbe schwarz. Der Zusatz <code>guide = "none"</code> sorgt dafür, dass diese Logikabfrage nicht in der Legende aufgeführt wird.</p>
@@ -397,7 +497,7 @@ Rechenleistung und Zeit einsparen
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> KFZ_R1),</span>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_y =</span> <span class="dv">200</span>, <span class="at">size =</span> <span class="fl">4.5</span>, <span class="at">alpha =</span> <span class="fl">0.5</span></span>
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -407,11 +507,11 @@ Rechenleistung und Zeit einsparen
 </div>
 </div>
 </section>
-<section id="weitere-anwendungsbeispiele" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="weitere-anwendungsbeispiele"><span class="header-section-number">1.6</span> Weitere Anwendungsbeispiele</h2>
+<section id="weitere-anwendungsbeispiele" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="weitere-anwendungsbeispiele"><span class="header-section-number">4.6</span> Weitere Anwendungsbeispiele</h2>
 <p>In diesem Abschnitt befinden sich weitere anwendungsbezogene Beispiele und Vorschläge zu weiteren Untersuchungen der Zählstellendaten.</p>
-<section id="mittlere-werktage" class="level3" data-number="1.6.1">
-<h3 data-number="1.6.1" class="anchored" data-anchor-id="mittlere-werktage"><span class="header-section-number">1.6.1</span> Mittlere Werktage</h3>
+<section id="mittlere-werktage" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="mittlere-werktage"><span class="header-section-number">4.6.1</span> Mittlere Werktage</h3>
 <p>Häufig können in der Analyse sogenannte mittlere Werktage verwendet werden, um der Varianz vom Beginn und Ende der Woche zu entgehen. In diesem Fall interessieren uns also die Wochentage Dienstag, Mittwoch und Donnerstag an normalen Werktage außerhalb der Schulferien. Ein Blick in die <a href="https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/pdf-dateien/datensatzbeschreibung-Stundendaten.pdf?__blob=publicationFile&amp;v=4">Datensatzbeschreibung der BAST</a> zeigt uns, dass diese Unterteilung im Datensatz bereits vorliegt. Die Variable <code>Fahrtzw</code> besitzt die Ausprägungen w für Werktags, u für Urlaubswerktage und s für Sonn- und Feiertage. Somit müssen wir in unseren Filter lediglich die Abfrage <code>Fahrtzw == "w"</code> einfügen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ZST5116<span class="sc">$</span>Wotag <span class="ot">&lt;-</span> <span class="fu">factor</span>(ZST5116<span class="sc">$</span>Wotag,</span>
@@ -424,7 +524,7 @@ Rechenleistung und Zeit einsparen
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>data_werktag_mean <span class="ot">&lt;-</span> data_werktag <span class="sc">|&gt;</span></span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Stunde, Wotag) <span class="sc">|&gt;</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_KFZ_R1 =</span> <span class="fu">mean</span>(KFZ_R1),<span class="at">avg_KFZ_R2 =</span> <span class="fu">mean</span>(KFZ_R2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_KFZ_R1 =</span> <span class="fu">mean</span>(KFZ_R1),<span class="at">avg_KFZ_R2 =</span> <span class="fu">mean</span>(KFZ_R2))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_werktag_mean, <span class="fu">aes</span>(<span class="at">x =</span> Stunde, <span class="at">y =</span> avg_KFZ_R1, <span class="at">group =</span> Wotag, <span class="at">color =</span> Wotag)) <span class="sc">+</span></span>
@@ -434,7 +534,7 @@ Rechenleistung und Zeit einsparen
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Stunde"</span>,</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"KFZ_R1"</span>,</span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Wotag"</span>) <span class="sc">+</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -444,14 +544,14 @@ Rechenleistung und Zeit einsparen
 </div>
 </div>
 </section>
-<section id="mehrere-zählstellen-vergleichen" class="level3" data-number="1.6.2">
-<h3 data-number="1.6.2" class="anchored" data-anchor-id="mehrere-zählstellen-vergleichen"><span class="header-section-number">1.6.2</span> Mehrere Zählstellen vergleichen</h3>
-<p>Oft möchte man nicht nur die Daten einer Zählstelle auswerten, sondern mehrere Zählstellen miteinander vergleichen oder Entwicklungen über Jahre auswerten. Um mehrere Zählstellen miteinander zu vergleichen gehen wir zuerst exakt so vor wie in <a href="#sec-tagesganglinien" class="quarto-xref">Section&nbsp;1.4</a>. Wir importieren hier nun die Datensätze der Zählstellen 5113,5116,5125 und 5128.</p>
+<section id="mehrere-zählstellen-vergleichen" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="mehrere-zählstellen-vergleichen"><span class="header-section-number">4.6.2</span> Mehrere Zählstellen vergleichen</h3>
+<p>Oft möchte man nicht nur die Daten einer Zählstelle auswerten, sondern mehrere Zählstellen miteinander vergleichen oder Entwicklungen über Jahre auswerten. Um mehrere Zählstellen miteinander zu vergleichen gehen wir zuerst exakt so vor wie in <a href="#sec-tagesganglinien" class="quarto-xref"><span>Kapitel 4.4</span></a>. Wir importieren hier nun die Datensätze der Zählstellen 5113,5116,5125 und 5128.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ZST5113 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"data/zst5113_2022.csv"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">'iso-8859-1'</span>))</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>ZST5116 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"data/zst5116_2022.csv"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">'iso-8859-1'</span>))</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>ZST5125 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"data/zst5125_2022.csv"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">'iso-8859-1'</span>))</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>ZST5128 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"data/zst5128_2022.csv"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">'iso-8859-1'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>ZST5128 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"data/zst5128_2022.csv"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">'iso-8859-1'</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Mit Funktionen mehrere Datensätze einlesen">
 <div class="callout-header d-flex align-content-center">
@@ -466,7 +566,7 @@ Mit Funktionen mehrere Datensätze einlesen
 <p>Bei einer großen Anzahl an Datensätze mit gleichen Einlesungsoperationen bieten sich Funktionen an, um effizienter zu arbeiten und mögliche Fehler bei <em>copy-and-paste</em> zu verhindern: Siehe dazu [Referenz zu anderem Kapitel] <a href="https://r4ds.hadley.nz/functions.html" class="uri">https://r4ds.hadley.nz/functions.html</a></p>
 </div>
 </div>
-<p>Um diese verschiedenen Datensätze in einem Datensatz zu kombinieren, verwenden wir die <code>bind_rows()</code>-Funktion des Pakets <code>dplyr</code> aus dem <code>tidyverse</code>. Dazu geben wir dem Befehl eine Liste der zu kombinierenden Datensätze mit <code>list()</code> und fügen mit <code>.id =</code> eine Identifizierungsspalte hinzu. Standardmäßig werden diese Variable der Identifizierungsspalte einfach durchnummeriert. Es bietet sich aber an die jeweilige Nummer oder den Namen der Zählstelle zu verwenden. In unserem Fall entscheiden wir uns für den Namen. Analog zu <a href="#sec-tagesganglinien" class="quarto-xref">Section&nbsp;1.4</a> wandeln wir die Variable <code>Zählstelle</code> in einen Faktor mit den Namen als Ebenen um. Zusätzlich benennen wir auch die Wochentage wie bereits getan erneut um.</p>
+<p>Um diese verschiedenen Datensätze in einem Datensatz zu kombinieren, verwenden wir die <code>bind_rows()</code>-Funktion des Pakets <code>dplyr</code> aus dem <code>tidyverse</code>. Dazu geben wir dem Befehl eine Liste der zu kombinierenden Datensätze mit <code>list()</code> und fügen mit <code>.id =</code> eine Identifizierungsspalte hinzu. Standardmäßig werden diese Variable der Identifizierungsspalte einfach durchnummeriert. Es bietet sich aber an die jeweilige Nummer oder den Namen der Zählstelle zu verwenden. In unserem Fall entscheiden wir uns für den Namen. Analog zu <a href="#sec-tagesganglinien" class="quarto-xref"><span>Kapitel 4.4</span></a> wandeln wir die Variable <code>Zählstelle</code> in einen Faktor mit den Namen als Ebenen um. Zusätzlich benennen wir auch die Wochentage wie bereits getan erneut um.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">list</span>(ZST5113,ZST5116,ZST5125,ZST5128), <span class="at">.id =</span> <span class="st">"Zählstelle"</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -474,17 +574,17 @@ Mit Funktionen mehrere Datensätze einlesen
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>all_data<span class="sc">$</span>Wotag <span class="ot">&lt;-</span> <span class="fu">factor</span>(all_data<span class="sc">$</span>Wotag,</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a> <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>),</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a> <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Mo"</span>,<span class="st">"Di"</span>,<span class="st">"Mi"</span>,<span class="st">"Do"</span>,<span class="st">"Fr"</span>,<span class="st">"Sa"</span>,<span class="st">"So"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a> <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Mo"</span>,<span class="st">"Di"</span>,<span class="st">"Mi"</span>,<span class="st">"Do"</span>,<span class="st">"Fr"</span>,<span class="st">"Sa"</span>,<span class="st">"So"</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="sec-alle-tage" class="level4" data-number="1.6.2.1">
-<h4 data-number="1.6.2.1" class="anchored" data-anchor-id="sec-alle-tage"><span class="header-section-number">1.6.2.1</span> Über alle Tage</h4>
+<section id="sec-alle-tage" class="level4" data-number="4.6.2.1">
+<h4 data-number="4.6.2.1" class="anchored" data-anchor-id="sec-alle-tage"><span class="header-section-number">4.6.2.1</span> Über alle Tage</h4>
 <p>Wir wollen nun die Daten der Zählstellen für alle Tage gemittelt vergleichen. Dazu verwenden wir unseren kombinierten Datensatz und gruppieren diesen mit <code>group_by</code> nach der Identifikationsvariable der Zählstelle (<code>Zählstelle</code>) und dem Wochentag (<code>Wotag</code>). Danach leiten wir diese Werte an die <code>summarise()</code>-Funktion weiter. Diese gibt für jede Kombination der Gruppierungsvariable eine Reihe aus. Dazu benötigen wir für Kombination ebenfalls die Mittelwerte für beide Fahrtrichtungen (<code>KFZ_R1</code> und <code>KFZ_R2</code>). Diesen Datensatz speichern wir als neues Element.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data_wochentag <span class="ot">&lt;-</span> all_data <span class="sc">|&gt;</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Zählstelle, Wotag) <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_KFZ_R1 =</span> <span class="fu">mean</span>(KFZ_R1),<span class="at">avg_KFZ_R2 =</span> <span class="fu">mean</span>(KFZ_R2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_KFZ_R1 =</span> <span class="fu">mean</span>(KFZ_R1),<span class="at">avg_KFZ_R2 =</span> <span class="fu">mean</span>(KFZ_R2))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Mit diesen Daten können wir nun bereits mit <code>ggplot2</code> eine Grafik erstellen. Dazu verwenden wir grundsätzlich die verwendeten Funktionen aus <a href="#sec-tagesganglinien" class="quarto-xref">Section&nbsp;1.4</a>. Dieses Mal gruppieren und färben wir den Plot aber nach der Variable <code>Zählstelle</code> anstelle von <code>Wotag</code>.</p>
+<p>Mit diesen Daten können wir nun bereits mit <code>ggplot2</code> eine Grafik erstellen. Dazu verwenden wir grundsätzlich die verwendeten Funktionen aus <a href="#sec-tagesganglinien" class="quarto-xref"><span>Kapitel 4.4</span></a>. Dieses Mal gruppieren und färben wir den Plot aber nach der Variable <code>Zählstelle</code> anstelle von <code>Wotag</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_wochentag, <span class="fu">aes</span>(<span class="at">x =</span> Wotag, <span class="at">y =</span> avg_KFZ_R1, <span class="at">group =</span> Zählstelle, <span class="at">color =</span> Zählstelle, <span class="at">shape =</span> Zählstelle)) <span class="sc">+</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
@@ -494,7 +594,7 @@ Mit Funktionen mehrere Datensätze einlesen
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Verkehrsaufkommen Richtung 1 in Kfz/h"</span>,</span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"Zählstelle"</span>,</span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">shape =</span> <span class="st">"Zählstelle"</span>) <span class="sc">+</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -504,8 +604,8 @@ Mit Funktionen mehrere Datensätze einlesen
 </div>
 </div>
 </section>
-<section id="einen-wochentag-im-detail" class="level4" data-number="1.6.2.2">
-<h4 data-number="1.6.2.2" class="anchored" data-anchor-id="einen-wochentag-im-detail"><span class="header-section-number">1.6.2.2</span> Einen Wochentag im Detail</h4>
+<section id="einen-wochentag-im-detail" class="level4" data-number="4.6.2.2">
+<h4 data-number="4.6.2.2" class="anchored" data-anchor-id="einen-wochentag-im-detail"><span class="header-section-number">4.6.2.2</span> Einen Wochentag im Detail</h4>
 <p>Nun wollen wir uns einen Wochentag im Detail zwischen den verschiedenen Zählstellen vergleichen. Erneut filtern wir mit <code>filter()</code> unsere Daten so, dass in unserem Fall nur noch Dienstage übrig bleiben (<code>Wotag == "Di"</code>) und speichern diesen Datensatz. Zur weiteren Verarbeitung gruppieren wir diesen Datensatz nach Zählstellen und Stunde (<code>group_by(Zählstelle, Stunde)</code>) und erstellen mit <code>summarise()</code> für jede Stunde jeder Zählstelle eine neue Reihe und erzeugen den Mittelwert mit <code>mean()</code>.</p>
 <p><strong>TO-DO</strong>: Angabe der prozentualen stündlichen Anteile (+ Tabelle)</p>
 <div class="cell">
@@ -515,19 +615,21 @@ Mit Funktionen mehrere Datensätze einlesen
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>data_dienstag_mean <span class="ot">&lt;-</span> data_dienstag <span class="sc">|&gt;</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Zählstelle, Stunde) <span class="sc">|&gt;</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_KFZ_R1 =</span> <span class="fu">mean</span>(KFZ_R1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_KFZ_R1 =</span> <span class="fu">mean</span>(KFZ_R1)) <span class="sc">|&gt;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Zählstelle) <span class="sc">|&gt;</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Anteil =</span> (avg_KFZ_R1<span class="sc">/</span><span class="fu">sum</span>(avg_KFZ_R1))<span class="sc">*</span><span class="dv">100</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Der erstellte Plot ist nahezu identisch mit dem aus <a href="#sec-alle-tage" class="quarto-xref">Section&nbsp;1.6.2.1</a>, nur werden auf der x-Achse jetzt die einzelnen Stunden des Dienstags aufgeführt.</p>
+<p>Der erstellte Plot ist nahezu identisch mit dem aus <a href="#sec-alle-tage" class="quarto-xref"><span>Kapitel 4.6.2.1</span></a>, nur werden auf der x-Achse jetzt die einzelnen Stunden des Dienstags aufgeführt.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_dienstag_mean, <span class="fu">aes</span>(<span class="at">x =</span> Stunde, <span class="at">y =</span> avg_KFZ_R1, <span class="at">group =</span> Zählstelle, <span class="at">color =</span> Zählstelle, <span class="at">shape =</span> Zählstelle)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_dienstag_mean, <span class="fu">aes</span>(<span class="at">x =</span> Stunde, <span class="at">y =</span> Anteil, <span class="at">group =</span> Zählstelle, <span class="at">color =</span> Zählstelle, <span class="at">shape =</span> Zählstelle)) <span class="sc">+</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Durchschnittlicher stündlicher Verkehr dienstags R1"</span>,</span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Stunde"</span>,</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Verkehrsaufkommen Richtung 1 in Kfz/h"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Anteil am Verkehrsaufkommen Richtung 1 in Prozent"</span>,</span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"Zählstelle"</span>,</span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">shape =</span> <span class="st">"Zählstelle"</span>) <span class="sc">+</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -537,8 +639,8 @@ Mit Funktionen mehrere Datensätze einlesen
 </div>
 </div>
 </section>
-<section id="schwer-und-leichtverkehr" class="level4" data-number="1.6.2.3">
-<h4 data-number="1.6.2.3" class="anchored" data-anchor-id="schwer-und-leichtverkehr"><span class="header-section-number">1.6.2.3</span> Schwer und Leichtverkehr</h4>
+<section id="schwer-und-leichtverkehr" class="level4" data-number="4.6.2.3">
+<h4 data-number="4.6.2.3" class="anchored" data-anchor-id="schwer-und-leichtverkehr"><span class="header-section-number">4.6.2.3</span> Schwer und Leichtverkehr</h4>
 <p><strong>TO-DO</strong>: Erläuterungen</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>data_schwer <span class="ot">&lt;-</span> all_data <span class="sc">|&gt;</span></span>
@@ -553,7 +655,7 @@ Mit Funktionen mehrere Datensätze einlesen
 <span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Wochentag"</span>,</span>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"LKW_R1"</span>,</span>
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Zählstelle"</span>) <span class="sc">+</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -564,8 +666,10 @@ Mit Funktionen mehrere Datensätze einlesen
 </div>
 </section>
 </section>
-<section id="schwerverkehr-anteile-über-die-jahre" class="level3" data-number="1.6.3">
-<h3 data-number="1.6.3" class="anchored" data-anchor-id="schwerverkehr-anteile-über-die-jahre"><span class="header-section-number">1.6.3</span> Schwerverkehr-Anteile über die Jahre</h3>
+<section id="schwerverkehr-anteile-über-die-jahre" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="schwerverkehr-anteile-über-die-jahre"><span class="header-section-number">4.6.3</span> Schwerverkehr-Anteile über die Jahre</h3>
+<p>Nun schauen wir uns, wie wir den Verlauf der Schwerverkehr-Anteile über mehrere Jahre hinweg ansehen können. Dies kann z.B. bei der Beantwortung der Frage helfen, ob durch steigende Globalisierung auch der Anteil am Schwerverkehr steigt.</p>
+<p>Um mehrere Dateien gleichzeitig einzulesen, bietet es sich an eine <code>function</code> zu verwenden, damit dieser Schritt in einem Durchlauf erledigt wird und man mögliche Fehler beim Kopieren und Einfügen vermeidet.</p>
 <p><strong>TO-DO</strong>: Erläuterungen</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Notiz für Matthias: Das hier ist eine frühe, nicht sonderlich gute Lösung, die ich aber noch behalte, bis ich mir überlegt habe wie ich die Erläuterung von Funktionen und Schleifen implementiere. Am ungeschicktesten ist das Benötigen des Extra-Ordners da momentan einfach nur nach csv-Dateien gefiltert wird.</span></span>
@@ -585,7 +689,7 @@ Mit Funktionen mehrere Datensätze einlesen
 <span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>df_schwer <span class="ot">&lt;-</span> df_NA <span class="sc">|&gt;</span> </span>
 <span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Jahr) <span class="sc">|&gt;</span> </span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">SV =</span> <span class="fu">sum</span>(DTV_SV_MobisSo_Q),<span class="at">Alle =</span> <span class="fu">sum</span>(DTV_Kfz_MobisSo_Q),<span class="at">Anteil =</span> (SV<span class="sc">/</span>Alle)<span class="sc">*</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">SV =</span> <span class="fu">sum</span>(DTV_SV_MobisSo_Q),<span class="at">Alle =</span> <span class="fu">sum</span>(DTV_Kfz_MobisSo_Q),<span class="at">Anteil =</span> (SV<span class="sc">/</span>Alle)<span class="sc">*</span><span class="dv">100</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df_schwer, <span class="fu">aes</span>(<span class="at">x =</span> Jahr, <span class="at">y =</span> Anteil)) <span class="sc">+</span></span>
@@ -593,7 +697,7 @@ Mit Funktionen mehrere Datensätze einlesen
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Jahr"</span>, <span class="at">y =</span> <span class="st">"Anteil am gesamten Verkehrsaufkommen"</span>) <span class="sc">+</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Anteil des Schwerverkehrs von 2003 bis 2018 in 1000"</span>) <span class="sc">+</span></span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">2003</span>,<span class="dv">2018</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_light</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -602,12 +706,13 @@ Mit Funktionen mehrere Datensätze einlesen
 </div>
 </div>
 </div>
+
+
 </section>
 </section>
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -643,18 +748,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -662,12 +756,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Kopiert");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
+      button.setAttribute("data-bs-title", "Kopiert");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",
@@ -686,7 +780,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -721,7 +855,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -995,9 +1133,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./musterloesung/musterloesung.html" class="pagination-link" aria-label="Musterlösung Verkehrsdatenanalyse">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Musterlösung Verkehrsdatenanalyse</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse/blob/main/verkehrsdatenanalyse.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li></ul></div></div></div></footer></body></html>

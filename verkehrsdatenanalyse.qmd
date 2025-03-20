@@ -1,8 +1,8 @@
 ---
-title: "Auswertung von Verkehrsdaten"
+title: "Ausführliche Erläuterung der Musterlösung"
 format: 
   html:
-    toc: false
+    toc: true
     number-sections: true
     colorlinks: true
   pdf:
@@ -33,13 +33,13 @@ library(osmdata)
 library(giscoR)
 ```
 
-::: {#Lizenz .border}
+:::: {#Lizenz .border}
 ::: {layout="[20, 80]" layout-valign="center"}
 ![](https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png)
 
 Bausteine Computergestützter Datenanalyse. Anwendungsbaustein "Verkehrsdatenanalyse" von Lukas Arnold, Simone Arnold, Florian Bagemihl, Matthias Baitsch, Marc Fehr, Maik Poetzsch und Sebastian Seipel ist lizensiert unter [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de). Das Werk ist abrufbar unter \<*Platzhalter*\>. Ausgenommen von der Lizenz sind alle Logos und anders gekennzeichneten Inhalte. 2024
 :::
-:::
+::::
 
 # Verkehrsdatenanalyse
 
@@ -223,9 +223,9 @@ ZST5116_DTV <- ZST5116 |>
   group_by(Stunde, Wotag) |> 
   summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
 
-# ZST5116_DTV$Wochentag <- factor(ZST5116_DTV$Wotag,
-#  levels = c(1,2,3,4,5,6,7),
-#  labels = c("Mo","Di","Mi","Do","Fr","Sa","So"))
+ ZST5116_DTV$Wochentag <- factor(ZST5116_DTV$Wotag,
+  levels = c(1,2,3,4,5,6,7),
+  labels = c("Mo","Di","Mi","Do","Fr","Sa","So"))
 ```
 
 Nun können wir diese Daten (exemplarisch hier Fahrtrichtung 1 mit `KFZ_R1`) in `ggplot2` verwenden. Wir wollen für eine Tagesganglinie nun für jede Stunde einen Datenpunkt darstellen und diese mit einer Linie verbinden.
@@ -239,7 +239,7 @@ Mit `theme_light()` verwenden wir ein vorgefertigtes Thema (<https://ggplot2.tid
 ```{r}
 #| warning: false
 
-ggplot(data = ZST5116_DTV, aes(x = Stunde, y = avg_KFZ_R1 ,group = Wotag ,color = factor(Wotag), shape = Wotag)) +
+ggplot(data = ZST5116_DTV, aes(x = Stunde, y = avg_KFZ_R1 ,group = Wochentag ,color = factor(Wochentag), shape = Wochentag)) +
   geom_point(size = 2) +
   geom_line(linewidth = 1) +
   labs(title = "Tagesganglinien Zählstelle 5116 Richtung 1",
@@ -482,27 +482,6 @@ df_schwer <- df_NA |>
   group_by(Jahr) |> 
   summarise(SV = sum(DTV_SV_MobisSo_Q),Alle = sum(DTV_Kfz_MobisSo_Q),Anteil = (SV/Alle)*100)
 ```
-
-```{r}
-#| warning: false
-
-read_unfaelle <- function(f) {
-  read_csv2(f, id = "Jahr", locale = locale(encoding = 'iso-8859-1')) |>
- filter(DTV_Kfz_MobisSo_Q != 'NA' & DTV_SV_MobisSo_Q != 'NA') 
-}
-
-data_na <- list.files(path="data_jw", pattern = "\\.csv$",full.names=T) |>
-  map(read_unfaelle) |>
-  list_rbind() |>
-  str_remove_all(Jahr, "[data_jw/Jawe]") |>
-  str_remove_all(Jahr, "[.csv]") |>
-  as.numeric(Jahr)
-
-data_schwer <- data_na |> 
-  group_by(Jahr) |> 
-  summarise(SV = sum(DTV_SV_MobisSo_Q),Alle = sum(DTV_Kfz_MobisSo_Q),Anteil = (SV/Alle)*100)
-```
-
 
 ```{r}
 ggplot(data = df_schwer, aes(x = Jahr, y = Anteil)) +
