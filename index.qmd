@@ -9,7 +9,7 @@ Bausteine Computergestützter Datenanalyse. "Verkehrsdatenanalyse" von Lukas Arn
 Simone Arnold, Florian Bagemihl, Matthias Baitsch, Marc Fehr, Maik Poetzsch und 
 Sebastian Seipel ist lizensiert unter [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de). 
 Das Werk ist abrufbar unter <https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse>. 
-Ausgenommen von der Lizenz sind alle Logos und anders gekennzeichneten Inhalte. 2024
+Ausgenommen von der Lizenz sind alle Logos Dritter und anders gekennzeichnete Inhalte. 2025
 
 :::
 
@@ -22,10 +22,10 @@ Sebastian Seipel. 2024. „Bausteine Computergestützter Datenanalyse.
 BibTeX-Vorlage
 
 ```
-@misc{BCD-Styleguide-2024,
+@misc{BCD-a-Verkehrsdatenanalyse-2025,
  title={Bausteine Computergestützter Datenanalyse. Anwendungsbaustein Verkehrsdatanalyse},
  author={Arnold, Lukas and Arnold, Simone and Baitsch, Matthias and Fehr, Marc and Poetzsch, Maik and Seipel, Sebastian},
- year={2024},
+ year={2025},
  url={https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse}} 
 ```
 

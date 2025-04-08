@@ -6,13 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Lukas Arnold">
-<meta name="author" content="Simone Arnold">
-<meta name="author" content="Florian Bagemihl">
-<meta name="author" content="Matthias Baitsch">
-<meta name="author" content="Marc Fehr">
-<meta name="author" content="Maik Poetzsch">
-<meta name="author" content="Sebastian Seipel">
 
 <title>3&nbsp; Ausführliche Erläuterung der Musterlösung – a-verkehrsdatenanalyse</title>
 <style>
@@ -113,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -182,7 +175,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#verkehrsdatenanalyse" id="toc-verkehrsdatenanalyse" class="nav-link active" data-scroll-target="#verkehrsdatenanalyse"><span class="header-section-number">4</span> Verkehrsdatenanalyse</a>
+  <ul class="collapse">
+  <li><a href="#voraussetzungen" id="toc-voraussetzungen" class="nav-link" data-scroll-target="#voraussetzungen"><span class="header-section-number">4.1</span> Voraussetzungen</a></li>
+  <li><a href="#lernziele" id="toc-lernziele" class="nav-link" data-scroll-target="#lernziele"><span class="header-section-number">4.2</span> Lernziele</a></li>
+  <li><a href="#deutschlandkarte-mit-zählstellendaten" id="toc-deutschlandkarte-mit-zählstellendaten" class="nav-link" data-scroll-target="#deutschlandkarte-mit-zählstellendaten"><span class="header-section-number">4.3</span> Deutschlandkarte mit Zählstellendaten</a>
+  <ul class="collapse">
+  <li><a href="#sec-deutschlandkarte" id="toc-sec-deutschlandkarte" class="nav-link" data-scroll-target="#sec-deutschlandkarte"><span class="header-section-number">4.3.1</span> Deutschlandkarte</a></li>
+  <li><a href="#sec-autobahnverlauf" id="toc-sec-autobahnverlauf" class="nav-link" data-scroll-target="#sec-autobahnverlauf"><span class="header-section-number">4.3.2</span> Autobahnverlauf</a></li>
+  <li><a href="#sec-zählstellendaten" id="toc-sec-zählstellendaten" class="nav-link" data-scroll-target="#sec-zählstellendaten"><span class="header-section-number">4.3.3</span> Zählstellendaten</a></li>
+  </ul></li>
+  <li><a href="#sec-tagesganglinien" id="toc-sec-tagesganglinien" class="nav-link" data-scroll-target="#sec-tagesganglinien"><span class="header-section-number">4.4</span> Tagesganglinien</a>
+  <ul class="collapse">
+  <li><a href="#sec-tagesganglinien-einzeln" id="toc-sec-tagesganglinien-einzeln" class="nav-link" data-scroll-target="#sec-tagesganglinien-einzeln"><span class="header-section-number">4.4.1</span> Tagesganglinien für einzelne Wochentage</a></li>
+  </ul></li>
+  <li><a href="#sec-50stunde" id="toc-sec-50stunde" class="nav-link" data-scroll-target="#sec-50stunde"><span class="header-section-number">4.5</span> 50. Stunde</a></li>
+  <li><a href="#weitere-anwendungsbeispiele" id="toc-weitere-anwendungsbeispiele" class="nav-link" data-scroll-target="#weitere-anwendungsbeispiele"><span class="header-section-number">4.6</span> Weitere Anwendungsbeispiele</a>
+  <ul class="collapse">
+  <li><a href="#mittlere-werktage" id="toc-mittlere-werktage" class="nav-link" data-scroll-target="#mittlere-werktage"><span class="header-section-number">4.6.1</span> Mittlere Werktage</a></li>
+  <li><a href="#mehrere-zählstellen-vergleichen" id="toc-mehrere-zählstellen-vergleichen" class="nav-link" data-scroll-target="#mehrere-zählstellen-vergleichen"><span class="header-section-number">4.6.2</span> Mehrere Zählstellen vergleichen</a></li>
+  <li><a href="#schwerverkehr-anteile-über-die-jahre" id="toc-schwerverkehr-anteile-über-die-jahre" class="nav-link" data-scroll-target="#schwerverkehr-anteile-über-die-jahre"><span class="header-section-number">4.6.3</span> Schwerverkehr-Anteile über die Jahre</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse/blob/main/verkehrsdatenanalyse.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -195,25 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor:innen</div>
-    <div class="quarto-title-meta-contents">
-             <p>Lukas Arnold </p>
-             <p>Simone Arnold </p>
-             <p>Florian Bagemihl </p>
-             <p>Matthias Baitsch </p>
-             <p>Marc Fehr </p>
-             <p>Maik Poetzsch </p>
-             <p>Sebastian Seipel </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">20. März 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -223,21 +227,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="Lizenz" class="border">
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout="[20, 80]">
-<div class="quarto-layout-row quarto-layout-valign-center">
-<div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
-<p><img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" class="img-fluid"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 80.0%;justify-content: flex-start;">
-<p>Bausteine Computergestützter Datenanalyse. Anwendungsbaustein “Verkehrsdatenanalyse” von Lukas Arnold, Simone Arnold, Florian Bagemihl, Matthias Baitsch, Marc Fehr, Maik Poetzsch und Sebastian Seipel ist lizensiert unter <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>. Das Werk ist abrufbar unter &lt;<em>Platzhalter</em>&gt;. Ausgenommen von der Lizenz sind alle Logos und anders gekennzeichneten Inhalte. 2024</p>
-</div>
-</div>
-</div>
-</div>
 <section id="verkehrsdatenanalyse" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Verkehrsdatenanalyse</h1>
 <p>In diesem Baustein werden Aspekte der Verkehrsdatenanalyse wie Tagesganglinien, Zählstellendatenauswertung in Kartendarstellung und die Bestimmung der 50. Stunde behandelt.</p>
@@ -1147,4 +1136,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse/blob/main/verkehrsdatenanalyse.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse/blob/main/verkehrsdatenanalyse.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li></ul></div></div></div></footer></body></html>
