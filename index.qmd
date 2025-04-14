@@ -17,7 +17,7 @@ Zitiervorschlag
 
 Arnold, Lukas, Simone Arnold, Matthias Baitsch, Marc Fehr, Maik Poetzsch, und 
 Sebastian Seipel. 2024. „Bausteine Computergestützter Datenanalyse. 
-"Anwendungsbaustein Verkehrsdatanalyse“. <https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse>.
+"Anwendungsbaustein Verkehrsdatenalyse“. <https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse>.
 
 BibTeX-Vorlage
 
