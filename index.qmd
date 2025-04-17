@@ -15,8 +15,8 @@ Ausgenommen von der Lizenz sind alle Logos Dritter und anders gekennzeichnete In
 
 Zitiervorschlag
 
-Arnold, Lukas, Simone Arnold, Matthias Baitsch, Marc Fehr, Maik Poetzsch, und 
-Sebastian Seipel. 2024. „Bausteine Computergestützter Datenanalyse. 
+Arnold, Lukas, Simone Arnold, Florian Bagemihl, Matthias Baitsch, Marc Fehr, Maik Poetzsch, und 
+Sebastian Seipel. 2025. „Bausteine Computergestützter Datenanalyse. 
 "Anwendungsbaustein Verkehrsdatenalyse“. <https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse>.
 
 BibTeX-Vorlage
@@ -24,7 +24,7 @@ BibTeX-Vorlage
 ```
 @misc{BCD-a-Verkehrsdatenanalyse-2025,
  title={Bausteine Computergestützter Datenanalyse. Anwendungsbaustein Verkehrsdatanalyse},
- author={Arnold, Lukas and Arnold, Simone and Baitsch, Matthias and Fehr, Marc and Poetzsch, Maik and Seipel, Sebastian},
+ author={Arnold, Lukas and Arnold, Simone and Florian Bagemihl and Baitsch, Matthias and Fehr, Marc and Poetzsch, Maik and Seipel, Sebastian},
  year={2025},
  url={https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse}} 
 ```
