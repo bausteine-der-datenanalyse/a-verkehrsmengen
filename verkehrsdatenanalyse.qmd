@@ -23,19 +23,7 @@ library(osmdata)
 library(giscoR)
 ```
 
-# Verkehrsdatenanalyse
-
-In diesem Baustein werden Aspekte der Verkehrsdatenanalyse wie Tagesganglinien, Zählstellendatenauswertung in Kartendarstellung und die Bestimmung der 50. Stunde behandelt.
-
-## Voraussetzungen
-
-Zum erfolgreichen Bearbeiten dieses Anwendungsbausteins benötigen Sie die Inhalte des Methodenbausteins Grundlagen der Statistik \[Referenz\] und des Werkzeugbausteins Datenmanagements \[Referenz\]
-
-## Lernziele
-
-Ziel dieses Bausteins ist es, typische Inhalte von verkehrsrelevanten Fragestellungen in grafischer Form mithilfe der Programmiersprache R darzustellen. Dabei lernen Sie wo deutschsprachige Verkehrsdaten gefunden werden können, wie Verkehrsdaten von Dauerzählstellen auf Autobahnen eingelesen und analysiert werden und welche verschiedenen Darstellungsformen sich für bestimmte Datentypen eignen.
-
-## Deutschlandkarte mit Zählstellendaten
+## Aufgabe 1: Deutschlandkarte mit Zählstellendaten
 
 Als ersten Schritt interessieren uns besonders stark befahrene Streckenabschnitte von Autobahnen und wir wollen diese in einer Deutschlandkarte darstellen. Wir gehen hierbei schrittweise vor:
 
@@ -178,7 +166,7 @@ ggplot() +
   theme_void()
 ```
 
-## Tagesganglinien {#sec-tagesganglinien}
+## Aufgabe 2:{#sec-tagesganglinien}
 
 Als weitere wichtige Größe in der Verkehrsdatenanalyse schauen wir uns die Tagesganglinien an. Dazu benötigen wir die Daten einer Zählstelle für jeden Tag. Eine Auflistung der Zählstellen und ihres Datensatzes findet sich ebenfalls auf der [Seite der BASt.](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html?nn=1819490&cms_strTyp=A&cms_map=0)
 
@@ -191,7 +179,9 @@ ZST5116 <- read_csv2("data/zst5116_2022.csv", locale = locale(encoding = 'iso-88
 
 Auch hier hilft es, sich die [Datensatzbeschreibung der BAST](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/pdf-dateien/datensatzbeschreibung-Stundendaten.pdf?__blob=publicationFile&v=4) anzuschauen.
 
-### Tagesganglinien für einzelne Wochentage {#sec-tagesganglinien-einzeln}
+### Aufgabe 2 a):Tagesganglinien{#sec-tagesganglinien-einzeln}
+
+#### Einzelne Wochentage
 
 Wir wollen nun die Tagesganglinien der ausgewählten Zählstelle für jeden Wochentag erstellen. Wir brauchen also Mittelwerte für jede Stunde jedes Wochentages. Dazu benötigen wir das Paket `dplyr` aus der Paketsammlung `tidyverse`.
 
@@ -229,11 +219,95 @@ ggplot(data = ZST5116_DTV, aes(x = Stunde, y = avg_KFZ_R1 ,group = Wochentag ,co
        y = "Verkehrsaufkommen Richtung 1 in Kfz/h",
        color = "Wochentag",
       shape = "Wochentag") +
+  scale_color_viridis_d() +
   theme_light()
  
 ```
 
-## 50. Stunde {#sec-50stunde}
+#### Mittlerer Werktag von vier Zählstellen
+
+**Für den Einstieg in das Thema beginnen wir mit einer einzelnen Zählstelle. Die Lösung für mehrere Zählstellen befindet sich weiter unten in diesem Abschnitt.**
+
+Häufig können in der Analyse sogenannte mittlere Werktage verwendet werden, um der Varianz vom Beginn und Ende der Woche zu entgehen. In diesem Fall interessieren uns also die Wochentage Dienstag, Mittwoch und Donnerstag an normalen Werktage außerhalb der Schulferien. Ein Blick in die [Datensatzbeschreibung der BASt](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/pdf-dateien/datensatzbeschreibung-Stundendaten.pdf?__blob=publicationFile&v=4) zeigt uns, dass diese Unterteilung im Datensatz bereits vorliegt. Die Variable `Fahrtzw` besitzt die Ausprägungen w für Werktags, u für Urlaubswerktage und s für Sonn- und Feiertage. Somit müssen wir in unseren Filter lediglich die Abfrage `Fahrtzw == "w"` einfügen.
+
+```{r}
+#| warning: false
+
+ZST5116$Wotag <- factor(ZST5116$Wotag,
+ levels = c(1,2,3,4,5,6,7),
+ labels = c("Mo","Di","Mi","Do","Fr","Sa","So"))
+
+
+data_werktag <- ZST5116 |>
+  filter(Fahrtzw == "w", Wotag %in% c("Di", "Mi", "Do"))
+
+data_werktag_mean <- data_werktag |>
+  group_by(Stunde) |>
+  summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
+```
+
+Diese Daten können wir nun analog zum ersten Teil dieser Aufgabe plotten:
+
+```{r}
+ggplot(data = data_werktag_mean, aes(x = Stunde, y = avg_KFZ_R1, group = 1)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Verkehrsaufkommen mittlerer Werktage Zählstelle 5116 R1",
+       x = "Stunde",
+       y = "KFZ_R1") +
+  theme_light()
+```
+
+Oft möchte man nicht nur die Daten einer Zählstelle auswerten, sondern mehrere Zählstellen miteinander vergleichen oder Entwicklungen über Jahre auswerten. Um mehrere Zählstellen miteinander zu vergleichen gehen wir zuerst exakt so vor wie in @sec-tagesganglinien. Wir importieren hier nun die Datensätze der Zählstellen 5113,5116,5125 und 5128.
+
+```{r}
+#| warning: false
+ZST5113 <- read_csv2("data/zst5113_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+ZST5116 <- read_csv2("data/zst5116_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+ZST5125 <- read_csv2("data/zst5125_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+ZST5128 <- read_csv2("data/zst5128_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+```
+
+::: {.callout-tip title="Mit Funktionen mehrere Datensätze einlesen"}
+Bei einer großen Anzahl an Datensätze mit gleichen Einlesungsoperationen bieten sich Funktionen an, um effizienter zu arbeiten und mögliche Fehler bei *copy-and-paste* zu verhindern: Siehe dazu \[Referenz zu anderem Kapitel\] <https://r4ds.hadley.nz/functions.html>
+:::
+
+Um diese verschiedenen Datensätze in einem Datensatz zu kombinieren, verwenden wir die `bind_rows()`-Funktion des Pakets `dplyr` aus dem `tidyverse`. Dazu geben wir dem Befehl eine Liste der zu kombinierenden Datensätze mit `list()` und fügen mit `.id =` eine Identifizierungsspalte hinzu. Standardmäßig werden diese Variable der Identifizierungsspalte einfach durchnummeriert. Es bietet sich aber an die jeweilige Nummer oder den Namen der Zählstelle zu verwenden. In unserem Fall entscheiden wir uns für den Namen. Analog zu @sec-tagesganglinien wandeln wir die Variable `Zaehlstelle` in einen Faktor mit den Namen als Ebenen um. Zusätzlich benennen wir auch die Wochentage wie bereits getan erneut um.
+
+```{r}
+all_data <- bind_rows(list(ZST5113,ZST5116,ZST5125,ZST5128), .id = "Zaehlstelle")
+
+all_data$Zaehlstelle <- factor(all_data$Zaehlstelle, levels = c("1", "2", "3", "4"), labels = c("Bochum", "Wanne-Eickel", "Waltrop-Brambauer", "Wenden-Dahl"))
+
+all_data$Wotag <- factor(all_data$Wotag,
+ levels = c(1,2,3,4,5,6,7),
+ labels = c("Mo","Di","Mi","Do","Fr","Sa","So"))
+```
+
+```{r}
+data_werktag_all <- all_data |>
+  filter(Fahrtzw == "w", Wotag %in% c("Di", "Mi", "Do"))
+
+data_werktag_mean_all <- data_werktag_all |>
+  group_by(Stunde, Zaehlstelle) |>
+  summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
+```
+
+Wenn wir diese gefilterten Daten wie bereits gelernt darstellen, erhalten wir folgende Plots: 
+
+```{r}
+ggplot(data = data_werktag_mean_all, aes(x = Stunde, y = avg_KFZ_R1, group = Zaehlstelle, color = Zaehlstelle)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Verkehrsaufkommen mittlerer Werktage aller Zählstellen",
+       x = "Stunde",
+       y = "KFZ_R1",
+       color = "Wotag") +
+  scale_color_viridis_d() +
+  theme_light()
+```
+
+### Aufgabe 2 b): 50. Stunde {#sec-50stunde}
 
 Als einen weiteren wichtigen Kennwert schauen wir uns das Verkehrsaufkommen in der 50. Stunde an. Für eine rein deskriptive Beschreibung der 50. Stunden können wir den Datensatz absteigend sortieren und dann den 50. Wert auswählen. Dazu benutzen wir erneut die `arrange()`-Funktion, dieses Mal aber mit dem Zusatz `desc()`(kurz für englisch *descending* = absteigend). Um eine Reihe anhand der Position auszuwählen, verwenden wir den `slice()`-Befehl. Dies leiten wir nun an die `select()`-Funktion weiter, die es uns ermöglicht anhand des Namens auszuwählen, welche Variablen wir für unsere Darstellung behalten möchten. In diesem Fall wählen wir das Datum (`Datum`), den Wochentag (`Wotag`), die Stunde des Tages (`Stunde`) und den tatsächlichen Verkehrswert (`KFZ_R1`) aus.
 
@@ -288,153 +362,7 @@ ggplot(data = ZST5116_top[1:80, ], aes(x = Nummer,y = KFZ_R1, fill = Nummer == 5
   theme_light()
 ```
 
-## Weitere Anwendungsbeispiele
-
-In diesem Abschnitt befinden sich weitere anwendungsbezogene Beispiele und Vorschläge zu weiteren Untersuchungen der Zählstellendaten.
-
-### Mittlere Werktage
-
-Häufig können in der Analyse sogenannte mittlere Werktage verwendet werden, um der Varianz vom Beginn und Ende der Woche zu entgehen. In diesem Fall interessieren uns also die Wochentage Dienstag, Mittwoch und Donnerstag an normalen Werktage außerhalb der Schulferien. Ein Blick in die [Datensatzbeschreibung der BAST](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/pdf-dateien/datensatzbeschreibung-Stundendaten.pdf?__blob=publicationFile&v=4) zeigt uns, dass diese Unterteilung im Datensatz bereits vorliegt. Die Variable `Fahrtzw` besitzt die Ausprägungen w für Werktags, u für Urlaubswerktage und s für Sonn- und Feiertage. Somit müssen wir in unseren Filter lediglich die Abfrage `Fahrtzw == "w"` einfügen.
-
-```{r}
-#| warning: false
-
-ZST5116$Wotag <- factor(ZST5116$Wotag,
- levels = c(1,2,3,4,5,6,7),
- labels = c("Mo","Di","Mi","Do","Fr","Sa","So"))
-
-
-data_werktag <- ZST5116 |>
-  filter(Fahrtzw == "w", Wotag %in% c("Di", "Mi", "Do"))
-
-data_werktag_mean <- data_werktag |>
-  group_by(Stunde, Wotag) |>
-  summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
-```
-
-```{r}
-ggplot(data = data_werktag_mean, aes(x = Stunde, y = avg_KFZ_R1, group = Wotag, color = Wotag)) +
-  geom_point(size = 2) +
-  geom_line(linewidth = 1) +
-  labs(title = "Verkehrsaufkommen mittlerer Werktage Zählstelle 5116 R1",
-       x = "Stunde",
-       y = "KFZ_R1",
-       color = "Wotag") +
-  theme_light()
-```
-
-### Mehrere Zählstellen vergleichen
-
-Oft möchte man nicht nur die Daten einer Zählstelle auswerten, sondern mehrere Zählstellen miteinander vergleichen oder Entwicklungen über Jahre auswerten. Um mehrere Zählstellen miteinander zu vergleichen gehen wir zuerst exakt so vor wie in @sec-tagesganglinien. Wir importieren hier nun die Datensätze der Zählstellen 5113,5116,5125 und 5128.
-
-```{r}
-#| warning: false
-ZST5113 <- read_csv2("data/zst5113_2022.csv", locale = locale(encoding = 'iso-8859-1'))
-ZST5116 <- read_csv2("data/zst5116_2022.csv", locale = locale(encoding = 'iso-8859-1'))
-ZST5125 <- read_csv2("data/zst5125_2022.csv", locale = locale(encoding = 'iso-8859-1'))
-ZST5128 <- read_csv2("data/zst5128_2022.csv", locale = locale(encoding = 'iso-8859-1'))
-```
-
-::: {.callout-tip title="Mit Funktionen mehrere Datensätze einlesen"}
-Bei einer großen Anzahl an Datensätze mit gleichen Einlesungsoperationen bieten sich Funktionen an, um effizienter zu arbeiten und mögliche Fehler bei *copy-and-paste* zu verhindern: Siehe dazu \[Referenz zu anderem Kapitel\] <https://r4ds.hadley.nz/functions.html>
-:::
-
-Um diese verschiedenen Datensätze in einem Datensatz zu kombinieren, verwenden wir die `bind_rows()`-Funktion des Pakets `dplyr` aus dem `tidyverse`. Dazu geben wir dem Befehl eine Liste der zu kombinierenden Datensätze mit `list()` und fügen mit `.id =` eine Identifizierungsspalte hinzu. Standardmäßig werden diese Variable der Identifizierungsspalte einfach durchnummeriert. Es bietet sich aber an die jeweilige Nummer oder den Namen der Zählstelle zu verwenden. In unserem Fall entscheiden wir uns für den Namen. Analog zu @sec-tagesganglinien wandeln wir die Variable `Zählstelle` in einen Faktor mit den Namen als Ebenen um. Zusätzlich benennen wir auch die Wochentage wie bereits getan erneut um.
-
-```{r}
-all_data <- bind_rows(list(ZST5113,ZST5116,ZST5125,ZST5128), .id = "Zählstelle")
-
-all_data$Zählstelle <- factor(all_data$Zählstelle, levels = c("1", "2", "3", "4"), labels = c("Bochum", "Wanne-Eickel", "Waltrop-Brambauer", "Wenden-Dahl"))
-
-all_data$Wotag <- factor(all_data$Wotag,
- levels = c(1,2,3,4,5,6,7),
- labels = c("Mo","Di","Mi","Do","Fr","Sa","So"))
-```
-
-#### Über alle Tage {#sec-alle-tage}
-
-Wir wollen nun die Daten der Zählstellen für alle Tage gemittelt vergleichen. Dazu verwenden wir unseren kombinierten Datensatz und gruppieren diesen mit `group_by` nach der Identifikationsvariable der Zählstelle (`Zählstelle`) und dem Wochentag (`Wotag`). Danach leiten wir diese Werte an die `summarise()`-Funktion weiter. Diese gibt für jede Kombination der Gruppierungsvariable eine Reihe aus. Dazu benötigen wir für Kombination ebenfalls die Mittelwerte für beide Fahrtrichtungen (`KFZ_R1` und `KFZ_R2`). Diesen Datensatz speichern wir als neues Element.
-
-```{r}
-#| warning: false
-
-
-data_wochentag <- all_data |>
-  group_by(Zählstelle, Wotag) |>
-  summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
-```
-
-Mit diesen Daten können wir nun bereits mit `ggplot2` eine Grafik erstellen. Dazu verwenden wir grundsätzlich die verwendeten Funktionen aus @sec-tagesganglinien. Dieses Mal gruppieren und färben wir den Plot aber nach der Variable `Zählstelle` anstelle von `Wotag`.
-
-```{r}
-ggplot(data = data_wochentag, aes(x = Wotag, y = avg_KFZ_R1, group = Zählstelle, color = Zählstelle, shape = Zählstelle)) +
-  geom_point(size = 2) +
-  geom_line(linewidth = 1) +
-  labs(title = "Durchschnittlicher stündlicher Verkehr für alle Zählstellen",
-        x = "Wochentag",
-        y = "Verkehrsaufkommen Richtung 1 in Kfz/h",
-        color = "Zählstelle",
-        shape = "Zählstelle") +
-  theme_light()
-```
-
-#### Einen Wochentag im Detail
-
-Nun wollen wir uns einen Wochentag im Detail zwischen den verschiedenen Zählstellen vergleichen. Erneut filtern wir mit `filter()` unsere Daten so, dass in unserem Fall nur noch Dienstage übrig bleiben (`Wotag == "Di"`) und speichern diesen Datensatz. Zur weiteren Verarbeitung gruppieren wir diesen Datensatz nach Zählstellen und Stunde (`group_by(Zählstelle, Stunde)`) und erstellen mit `summarise()` für jede Stunde jeder Zählstelle eine neue Reihe und erzeugen den Mittelwert mit `mean()`.
-
-**TO-DO**: Angabe der prozentualen stündlichen Anteile (+ Tabelle)
-
-```{r}
-#| warning: false
-
-data_dienstag <- all_data |>
-  filter(Wotag == "Di")
-
-
-data_dienstag_mean <- data_dienstag |>
-  group_by(Zählstelle, Stunde) |>
-  summarise(avg_KFZ_R1 = mean(KFZ_R1)) |>
-  group_by(Zählstelle) |>
-  mutate(Anteil = (avg_KFZ_R1/sum(avg_KFZ_R1))*100)
-
-```
-
-Der erstellte Plot ist nahezu identisch mit dem aus @sec-alle-tage, nur werden auf der x-Achse jetzt die einzelnen Stunden des Dienstags aufgeführt.
-
-```{r}
-ggplot(data = data_dienstag_mean, aes(x = Stunde, y = Anteil, group = Zählstelle, color = Zählstelle, shape = Zählstelle)) +
-  geom_point(size = 2) +
-  geom_line(linewidth = 1) +
-  labs(title = "Durchschnittlicher stündlicher Verkehr dienstags R1",
-        x = "Stunde",
-        y = "Anteil am Verkehrsaufkommen Richtung 1 in Prozent",
-        color = "Zählstelle",
-        shape = "Zählstelle") +
-  theme_light()
-```
-
-#### Schwer und Leichtverkehr
-
-**TO-DO**: Erläuterungen
-
-```{r}
-#| warning: false
-data_schwer <- all_data |>
-  group_by(Zählstelle, Wotag) |>
-  summarise(avg_LKW_R1 = mean(Lkw_R1),avg_LKW_R2 = mean(Lkw_R2))
-
-# Erstellung des Streudiagrammes Richtung 1. 
-ggplot(data = data_schwer, aes(x = Wotag, y = avg_LKW_R1, group = Zählstelle, color = Zählstelle)) +
-  geom_point(size = 2) +
-  geom_line(linewidth = 1) +
-  labs(title = "Durchschnittlicher stündlicher Schwerverkehr für alle Zählstellen R1",
-       x = "Wochentag",
-       y = "LKW_R1",
-       color = "Zählstelle") +
-  theme_light()
-```
-
-### Schwerverkehr-Anteile über die Jahre
+### Aufgabe 2 c): Schwerverkehr-Anteile über die Jahre
 
 Nun schauen wir uns, wie wir den Verlauf der Schwerverkehr-Anteile über mehrere Jahre hinweg ansehen können. Dies kann z.B. bei der Beantwortung der Frage helfen, ob durch steigende Globalisierung auch der Anteil am Schwerverkehr steigt.
 
@@ -474,3 +402,6 @@ ggplot(data = df_schwer, aes(x = Jahr, y = Anteil)) +
  theme_light()
 
 ```
+
+
+

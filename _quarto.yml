@@ -25,6 +25,7 @@ book:
     - aufgabenstellung/aufgabe_verkehrsdatenanalyse.qmd
     - musterloesung/musterloesung.qmd
     - verkehrsdatenanalyse.qmd
+    - weitere_beispiele.qmd
 
 format:
   html:

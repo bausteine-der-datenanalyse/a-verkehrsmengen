@@ -1,0 +1,127 @@
+---
+title: "Weitere Anwendungsbeispiele"
+format: 
+  html:
+    toc: true
+    number-sections: true
+    colorlinks: true
+---
+
+In diesem Abschnitt befinden sich weitere anwendungsbezogene Beispiele und Vorschläge zu weiteren Untersuchungen der Zählstellendaten.
+
+Dieser Abschnitt befindet sich noch in der Konstruktion.
+
+```{r}
+#| include: false
+library(ggplot2)
+library(tidyverse)
+library(lubridate)
+library(readxl)
+library(kableExtra)
+library(sf)
+library(osmdata)
+library(giscoR)
+```
+
+## Über alle Tage {#sec-alle-tage}
+
+Wir wollen nun die Daten der Zählstellen für alle Tage gemittelt vergleichen. Dazu verwenden wir unseren kombinierten Datensatz und gruppieren diesen mit `group_by` nach der Identifikationsvariable der Zählstelle (`Zählstelle`) und dem Wochentag (`Wotag`). Danach leiten wir diese Werte an die `summarise()`-Funktion weiter. Diese gibt für jede Kombination der Gruppierungsvariable eine Reihe aus. Dazu benötigen wir für Kombination ebenfalls die Mittelwerte für beide Fahrtrichtungen (`KFZ_R1` und `KFZ_R2`). Diesen Datensatz speichern wir als neues Element.
+
+```{r}
+#| warning: false
+ZST5113 <- read_csv2("data/zst5113_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+ZST5116 <- read_csv2("data/zst5116_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+ZST5125 <- read_csv2("data/zst5125_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+ZST5128 <- read_csv2("data/zst5128_2022.csv", locale = locale(encoding = 'iso-8859-1'))
+```
+
+```{r}
+all_data <- bind_rows(list(ZST5113,ZST5116,ZST5125,ZST5128), .id = "Zaehlstelle")
+
+all_data$Zaehlstelle <- factor(all_data$Zaehlstelle, levels = c("1", "2", "3", "4"), labels = c("Bochum", "Wanne-Eickel", "Waltrop-Brambauer", "Wenden-Dahl"))
+
+all_data$Wotag <- factor(all_data$Wotag,
+ levels = c(1,2,3,4,5,6,7),
+ labels = c("Mo","Di","Mi","Do","Fr","Sa","So"))
+```
+
+```{r}
+#| warning: false
+
+data_wochentag <- all_data |>
+  group_by(Zaehlstelle, Wotag) |>
+  summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
+```
+
+Mit diesen Daten können wir nun bereits mit `ggplot2` eine Grafik erstellen. Dazu verwenden wir grundsätzlich die verwendeten Funktionen aus @sec-tagesganglinien. Dieses Mal gruppieren und färben wir den Plot aber nach der Variable `Zählstelle` anstelle von `Wotag`.
+
+```{r}
+ggplot(data = data_wochentag, aes(x = Wotag, y = avg_KFZ_R1, group = Zaehlstelle, color = Zaehlstelle, shape = Zaehlstelle)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Durchschnittlicher stündlicher Verkehr für alle Zählstellen",
+        x = "Wochentag",
+        y = "Verkehrsaufkommen Richtung 1 in Kfz/h",
+        color = "Zaehlstelle",
+        shape = "Zaehlstelle") +
+  scale_colour_viridis_d() +
+  theme_light()
+```
+
+## Einen Wochentag im Detail
+
+Nun wollen wir uns einen Wochentag im Detail zwischen den verschiedenen Zählstellen vergleichen. Erneut filtern wir mit `filter()` unsere Daten so, dass in unserem Fall nur noch Dienstage übrig bleiben (`Wotag == "Di"`) und speichern diesen Datensatz. Zur weiteren Verarbeitung gruppieren wir diesen Datensatz nach Zählstellen und Stunde (`group_by(Zählstelle, Stunde)`) und erstellen mit `summarise()` für jede Stunde jeder Zählstelle eine neue Reihe und erzeugen den Mittelwert mit `mean()`.
+
+**TO-DO**: Angabe der prozentualen stündlichen Anteile (+ Tabelle)
+
+```{r}
+#| warning: false
+
+data_dienstag <- all_data |>
+  filter(Wotag == "Di")
+
+
+data_dienstag_mean <- data_dienstag |>
+  group_by(Zaehlstelle, Stunde) |>
+  summarise(avg_KFZ_R1 = mean(KFZ_R1)) |>
+  group_by(Zaehlstelle) |>
+  mutate(Anteil = (avg_KFZ_R1/sum(avg_KFZ_R1))*100)
+
+```
+
+Der erstellte Plot ist nahezu identisch mit dem aus @sec-alle-tage, nur werden auf der x-Achse jetzt die einzelnen Stunden des Dienstags aufgeführt.
+
+```{r}
+ggplot(data = data_dienstag_mean, aes(x = Stunde, y = Anteil, group = Zaehlstelle, color = Zaehlstelle, shape = Zaehlstelle)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Durchschnittlicher stündlicher Verkehr dienstags R1",
+        x = "Stunde",
+        y = "Anteil am Verkehrsaufkommen Richtung 1 in Prozent",
+        color = "Zaehlstelle",
+        shape = "Zaehlstelle") +
+  scale_colour_viridis_d() +
+  theme_light()
+```
+
+## Schwer und Leichtverkehr
+
+**TO-DO**: Erläuterungen
+
+```{r}
+#| warning: false
+data_schwer <- all_data |>
+  group_by(Zaehlstelle, Wotag) |>
+  summarise(avg_LKW_R1 = mean(Lkw_R1),avg_LKW_R2 = mean(Lkw_R2))
+
+# Erstellung des Streudiagrammes Richtung 1. 
+ggplot(data = data_schwer, aes(x = Wotag, y = avg_LKW_R1, group = Zaehlstelle, color = Zaehlstelle)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Durchschnittlicher stündlicher Schwerverkehr für alle Zählstellen R1",
+       x = "Wochentag",
+       y = "LKW_R1",
+       color = "Zaehlstelle") +
+  scale_colour_viridis_d() +
+  theme_light()
+```

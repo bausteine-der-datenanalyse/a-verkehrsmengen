@@ -7,11 +7,13 @@ format:
     colorlinks: true
 ---
 
-## Aufgabenstellung
-
 Für die Bewertung der bestehenden und die Planung der zukünftigen Straßenverkehrsinfrastruktur werden Informationen über das aktuelle sowie Prognosen für das zukünftige Verkehrsaufkommen benötigt. Auf Autobahnen und Bundesstraßen unterhält die Bundesanstalt für Straßenwesen (BAST) dazu Dauerzählstellen. Die gewonnenen Daten werden auch online zur Verfügung gestellt, siehe [Jahreswerte hier](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html) und [einzelne Zählstellen hier](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html?nn=1819490&cms_strTyp=A&cms_map=0).
 
-### Aufgabe 1
+## Aufgabe 1
+
+Erstellen sie eine Karte des deutschen Autobahnverlaufs und stellen sie in dieser Karte die Zählstellen anhand ihres Verkehrsaufkommen im Jahr 2022 dar.
+
+## Aufgabe 2
 
 Wählen Sie geeignete Zählstellen aus (4-streifige Autobahn 1, 6-streifige Autobahn 2, Autobahn in Ballungsgebiet, Autobahn im ländlichen Raum) und begründen Sie ihre Wahl.
 
@@ -25,6 +27,4 @@ b)  Stellen sie die Werte der 50. Stunde in einer Tabelle dar und wählen Sie ei
 
 c)  Untersuchen Sie die Entwicklung des prozentualen Anteils des Schwerverkehrs über die Jahre 2003 bis 2018.
 
-### Aufgabe 2
 
-Erstellen sie eine Karte des deutschen Autobahnverlaufs und stellen sie in dieser Karte die Zählstellen anhand ihres Verkehrsaufkommen im Jahr 2022 dar.

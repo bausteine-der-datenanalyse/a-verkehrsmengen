@@ -27,6 +27,58 @@ library(giscoR)
 
 ## Aufgabe 1
 
+Deutschlandkarte:
+
+```{{r}}
+d_de <- gisco_get_nuts(country = "Germany", nuts_level = 0, resolution = 03)
+```
+
+Autobahnnetz:
+
+```{{r}}
+if (!file.exists("data/d_bab.RData")) {
+  q <- opq(bbox = getbb("Deutschland", featuretype = "country"), timeout = 600)
+  d_bab_raw <- (add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf())$osm_lines
+  d_bab <- d_bab_raw |>
+    filter(st_contains(d_de, d_bab_raw, sparse = FALSE)[1,]) |>
+    drop_na(ref) |>
+    group_by(ref) |>
+    summarise() |>
+    st_simplify(dTolerance = 100) 
+  save(d_bab, d_bab_raw, file = "data/bab.RData")
+} else {
+  load(file = "data/d_bab.RData")
+}
+```
+
+Zählstellendaten für 2022:
+
+```{{r}}
+#| warning: false
+
+d_Jawe <- read_csv2("data/Jawe2022.csv", locale = locale(encoding = 'iso-8859-1'))
+```
+
+```{{r}}
+d_JaweNA <- d_Jawe |>
+  filter(Str_Kl == "A") |>
+  drop_na(DTV_Kfz_MobisSo_Q) |>
+  arrange(DTV_Kfz_MobisSo_Q)
+```
+
+Alle Elemente zusammen plotten:
+
+```{{r}}
+ggplot() +
+  geom_sf(data = d_de, fill = NA, size = 0.5) +
+  geom_sf(data = d_bab,  size = 0.35, show.legend = FALSE) +
+  geom_point(data = d_JaweNA, mapping = aes(x = Koor_WGS84_E, y = Koor_WGS84_N, color = DTV_Kfz_MobisSo_Q), size = 1.5, na.rm = FALSE) + 
+  scale_color_distiller(palette = 8 , direction = 1) +
+  theme_void()
+```
+
+## Aufgabe 2
+
 ### a) Tagesganglinien
 
 #### Tagesganglinie einer Zählstelle
@@ -66,7 +118,7 @@ ggplot(data = ZST5116_DTV, aes(x = Stunde, y = avg_KFZ_R1 ,group = Wochentag ,co
  
 ```
 
-#### Tagesganglinie von vier Zählstellen
+#### Tagesganglinie eines mittleren Werktags von vier Zählstellen
 
 *Daten einlesen und verarbeiten*
 
@@ -79,9 +131,9 @@ ZST5128 <- read_csv2("data/zst5128_2022.csv", locale = locale(encoding = 'iso-88
 ```
 
 ```{{r}}
-all_data <- bind_rows(list(ZST5113,ZST5116,ZST5125,ZST5128), .id = "Zählstelle")
+all_data <- bind_rows(list(ZST5113,ZST5116,ZST5125,ZST5128), .id = "Zaehlstelle")
 
-all_data$Zählstelle <- factor(all_data$Zählstelle, levels = c("1", "2", "3", "4"), labels = c("Bochum", "Wanne-Eickel", "Waltrop-Brambauer", "Wenden-Dahl"))
+all_data$Zaehlstelle <- factor(all_data$Zaehlstelle, levels = c("1", "2", "3", "4"), labels = c("Bochum", "Wanne-Eickel", "Waltrop-Brambauer", "Wenden-Dahl"))
 
 all_data$Wotag <- factor(all_data$Wotag,
  levels = c(1,2,3,4,5,6,7),
@@ -89,23 +141,24 @@ all_data$Wotag <- factor(all_data$Wotag,
 ```
 
 ```{{r}}
-data_werktag <- all_data |>
+data_werktag_all <- all_data |>
   filter(Fahrtzw == "w", Wotag %in% c("Di", "Mi", "Do"))
 
-data_werktag_mean <- data_werktag |>
-  group_by(Stunde, Wotag) |>
+data_werktag_mean_all <- data_werktag_all |>
+  group_by(Stunde, Zaehlstelle) |>
   summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
 ```
 
 *Plotten*
 ```{{r}}
-ggplot(data = data_werktag_mean, aes(x = Stunde, y = avg_KFZ_R1, group = Wotag, color = Wotag)) +
+ggplot(data = data_werktag_mean_all, aes(x = Stunde, y = avg_KFZ_R1, group = Zaehlstelle, color = Zaehlstelle)) +
   geom_point(size = 2) +
   geom_line(linewidth = 1) +
-  labs(title = "Verkehrsaufkommen mittlerer Werktage Zählstelle 5116 R1",
+  labs(title = "Verkehrsaufkommen mittlerer Werktage aller Zählstellen",
        x = "Stunde",
        y = "KFZ_R1",
        color = "Wotag") +
+  scale_color_viridis_d() +
   theme_light()
 ```
 
@@ -188,54 +241,4 @@ ggplot(data = df_schwer, aes(x = Jahr, y = Anteil)) +
  theme_light()
 ```
 
-## Aufgabe 2
 
-Deutschlandkarte:
-
-```{{r}}
-d_de <- gisco_get_nuts(country = "Germany", nuts_level = 0, resolution = 03)
-```
-
-Autobahnnetz:
-
-```{{r}}
-if (!file.exists("data/d_bab.RData")) {
-  q <- opq(bbox = getbb("Deutschland", featuretype = "country"), timeout = 600)
-  d_bab_raw <- (add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf())$osm_lines
-  d_bab <- d_bab_raw |>
-    filter(st_contains(d_de, d_bab_raw, sparse = FALSE)[1,]) |>
-    drop_na(ref) |>
-    group_by(ref) |>
-    summarise() |>
-    st_simplify(dTolerance = 100) 
-  save(d_bab, d_bab_raw, file = "data/bab.RData")
-} else {
-  load(file = "data/d_bab.RData")
-}
-```
-
-Zählstellendaten für 2022:
-
-```{{r}}
-#| warning: false
-
-d_Jawe <- read_csv2("data/Jawe2022.csv", locale = locale(encoding = 'iso-8859-1'))
-```
-
-```{{r}}
-d_JaweNA <- d_Jawe |>
-  filter(Str_Kl == "A") |>
-  drop_na(DTV_Kfz_MobisSo_Q) |>
-  arrange(DTV_Kfz_MobisSo_Q)
-```
-
-Alle Elemente zusammen plotten:
-
-```{{r}}
-ggplot() +
-  geom_sf(data = d_de, fill = NA, size = 0.5) +
-  geom_sf(data = d_bab,  size = 0.35, show.legend = FALSE) +
-  geom_point(data = d_JaweNA, mapping = aes(x = Koor_WGS84_E, y = Koor_WGS84_N, color = DTV_Kfz_MobisSo_Q), size = 1.5, na.rm = FALSE) + 
-  scale_color_distiller(palette = 8 , direction = 1) +
-  theme_void()
-```
