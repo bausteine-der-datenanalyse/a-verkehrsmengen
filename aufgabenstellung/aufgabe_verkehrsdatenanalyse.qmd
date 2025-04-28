@@ -15,7 +15,7 @@ Erstellen sie eine Karte des deutschen Autobahnverlaufs und stellen sie in diese
 
 ## Aufgabe 2
 
-Wählen Sie geeignete Zählstellen aus (4-streifige Autobahn 1, 6-streifige Autobahn 2, Autobahn in Ballungsgebiet, Autobahn im ländlichen Raum) und begründen Sie ihre Wahl.
+Wählen Sie  vier geeignete Zählstellen aus (beispielsweise 4-streifige Autobahn 1, 6-streifige Autobahn 2, Autobahn in Ballungsgebiet, Autobahn im ländlichen Raum) und analysieren Sie diese.
 
 a)  Erstellen sie folgende Tagesganglinien:
 
@@ -23,7 +23,7 @@ a)  Erstellen sie folgende Tagesganglinien:
 
 -   Ganglinie eines durchschnittlichen Werktags aller vier ausgewählten Zählstellen.
 
-b)  Stellen sie die Werte der 50. Stunde in einer Tabelle dar und wählen Sie eine geeignete Darstellungsform um die Relation der 50. Stunde mit den anderen Topstunden zu vergleichen.
+b)  Stellen sie die Werte der 50. Stunde einer Zählstelle in einer Tabelle dar und wählen Sie eine geeignete Darstellungsform um die Relation der 50. Stunde mit den anderen Topstunden zu vergleichen.
 
 c)  Untersuchen Sie die Entwicklung des prozentualen Anteils des Schwerverkehrs über die Jahre 2003 bis 2018.
 

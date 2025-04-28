@@ -54,7 +54,7 @@
     "href": "aufgabenstellung/aufgabe_verkehrsdatenanalyse.html#aufgabe-2",
     "title": "1  Aufgaben zur Verkehrsdatenanalyse",
     "section": "1.2 Aufgabe 2",
-    "text": "1.2 Aufgabe 2\nWählen Sie geeignete Zählstellen aus (4-streifige Autobahn 1, 6-streifige Autobahn 2, Autobahn in Ballungsgebiet, Autobahn im ländlichen Raum) und begründen Sie ihre Wahl.\n\nErstellen sie folgende Tagesganglinien:\n\n\nGanglinie aller Wochentage einer einzelnen Zählstelle.\nGanglinie eines durchschnittlichen Werktags aller vier ausgewählten Zählstellen.\n\n\nStellen sie die Werte der 50. Stunde in einer Tabelle dar und wählen Sie eine geeignete Darstellungsform um die Relation der 50. Stunde mit den anderen Topstunden zu vergleichen.\nUntersuchen Sie die Entwicklung des prozentualen Anteils des Schwerverkehrs über die Jahre 2003 bis 2018.",
+    "text": "1.2 Aufgabe 2\nWählen Sie vier geeignete Zählstellen aus (beispielsweise 4-streifige Autobahn 1, 6-streifige Autobahn 2, Autobahn in Ballungsgebiet, Autobahn im ländlichen Raum) und analysieren Sie diese.\n\nErstellen sie folgende Tagesganglinien:\n\n\nGanglinie aller Wochentage einer einzelnen Zählstelle.\nGanglinie eines durchschnittlichen Werktags aller vier ausgewählten Zählstellen.\n\n\nStellen sie die Werte der 50. Stunde einer Zählstelle in einer Tabelle dar und wählen Sie eine geeignete Darstellungsform um die Relation der 50. Stunde mit den anderen Topstunden zu vergleichen.\nUntersuchen Sie die Entwicklung des prozentualen Anteils des Schwerverkehrs über die Jahre 2003 bis 2018.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Aufgaben zur Verkehrsdatenanalyse</span>"
     ]
