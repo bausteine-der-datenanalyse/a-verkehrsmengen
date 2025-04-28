@@ -138,7 +138,7 @@ Zuguterletzt fügen wir die tatsächlichen Verkehrsdaten zu unserer Darstellung 
 d_Jawe <- read_csv2("data/Jawe2022.csv", locale = locale(encoding = 'iso-8859-1'))
 ```
 
-Durch `locale = locale(encoding = 'iso-8859-1')` bestimmen wir die Kodierung nach der ISO-Norm 8859-1, damit die Datei auch in anderen Systemen geladen werden kann. Danach müssen wir den Datensatz aufbereiten (siehe \[Referenz\]) und für unseren Zweck relevante Daten filtern (siehe \[Referenz\]). Dazu benötigen wir die ebenfalls online verfügbare [Datensatzbeschreibung der BAST.](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/pdf-dateien/DZ-Abkuerzungen-Beschreibung.pdf?__blob=publicationFile&v=11)
+Durch `locale = locale(encoding = 'iso-8859-1')` bestimmen wir die Kodierung nach der ISO-Norm 8859-1, damit die Datei auch in anderen Systemen geladen werden kann. Danach müssen wir den Datensatz aufbereiten (siehe \[Referenz\]) und für unseren Zweck relevante Daten filtern (siehe \[Referenz\]). Dazu benötigen wir die ebenfalls online verfügbare [Datensatzbeschreibung der BASt.](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/pdf-dateien/DZ-Abkuerzungen-Beschreibung.pdf?__blob=publicationFile&v=11)
 
 Dort sehen wir, dass die Variable `Str_Kl` die Straßenklasse beschreibt. Diese Variable hat die Ausprägungen "A" für Autobahnen und "B" für Bundesstraßen. In unserem Fall interessieren uns nur die Daten für Autobahnen, also die Ausprägung "A". Dies können wir mit `filter(Str_Kl == "A")` erreichen.
 
@@ -177,7 +177,7 @@ Exemplarisch verwenden wir hier die Zählstelle 5116 der A42 in Wanne-Eickel. Di
 ZST5116 <- read_csv2("data/zst5116_2022.csv", locale = locale(encoding = 'iso-8859-1'))
 ```
 
-Auch hier hilft es, sich die [Datensatzbeschreibung der BAST](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/pdf-dateien/datensatzbeschreibung-Stundendaten.pdf?__blob=publicationFile&v=4) anzuschauen.
+Auch hier hilft es, sich die [Datensatzbeschreibung der BASt](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/pdf-dateien/datensatzbeschreibung-Stundendaten.pdf?__blob=publicationFile&v=4) anzuschauen.
 
 ### Aufgabe 2 a):Tagesganglinien{#sec-tagesganglinien-einzeln}
 
@@ -402,6 +402,3 @@ ggplot(data = df_schwer, aes(x = Jahr, y = Anteil)) +
  theme_light()
 
 ```
-
-
-
