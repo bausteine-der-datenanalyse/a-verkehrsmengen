@@ -3,7 +3,7 @@ project:
   output-dir: output/book/
 
 book:
-  title: "a-verkehrsdatenanalyse"
+  title: "Anwendungsbaustein Verkehrsdatenanalyse"
   author:
     - Lukas Arnold
     - Simone Arnold
