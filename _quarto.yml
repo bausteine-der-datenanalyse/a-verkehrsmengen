@@ -3,7 +3,7 @@ project:
   output-dir: output/book/
 
 book:
-  title: "Anwendungsbaustein Verkehrsdatenanalyse"
+  title: "Anwendungsbaustein Analyse von Verkehrsmengen"
   author:
     - Lukas Arnold
     - Simone Arnold
@@ -14,11 +14,11 @@ book:
     - Sebastian Seipel
   date: today
   language: de-DE
-  repo-url: "https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse"
+  repo-url: "https://github.com/bausteine-der-datenanalyse/a-verkehrsmengen"
   repo-actions: [source]
   favicon: "bilder/favicon_bcd_new.svg"
   sidebar:
-    title: "Anwendungsbaustein Verkehrsdatenanalyse"
+    title: "Anwendungsbaustein Analyse von Verkehrsmengen"
     logo: "bilder/logo_bcd_new.svg"
   chapters:
     - index.qmd

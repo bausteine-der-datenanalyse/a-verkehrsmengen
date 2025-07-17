@@ -1,5 +1,5 @@
 ---
-title: "Aufgaben zur Verkehrsdatenanalyse"
+title: "Aufgaben zur Analyse von Verkehrsmengen"
 format: 
   html:
     toc: true
@@ -7,24 +7,25 @@ format:
     colorlinks: true
 ---
 
-Für die Bewertung der bestehenden und die Planung der zukünftigen Straßenverkehrsinfrastruktur werden Informationen über das aktuelle sowie Prognosen für das zukünftige Verkehrsaufkommen benötigt. Auf Autobahnen und Bundesstraßen unterhält die Bundesanstalt für Straßenwesen (BAST) dazu Dauerzählstellen. Die gewonnenen Daten werden auch online zur Verfügung gestellt, siehe [Jahreswerte hier](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html) und [einzelne Zählstellen hier](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html?nn=1819490&cms_strTyp=A&cms_map=0).
+Für die Bewertung der bestehenden und die Planung der zukünftigen Straßenverkehrsinfrastruktur werden Informationen über das aktuelle sowie Prognosen für das zukünftige Verkehrsaufkommen benötigt. Auf Autobahnen und Bundesstraßen unterhält die Bundesanstalt für Straßenwesen (BASt) dazu Dauerzählstellen. Die gewonnenen Daten werden auch online zur Verfügung gestellt, siehe [Jahreswerte hier](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html) und [einzelne Zählstellen hier](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html?nn=1819490&cms_strTyp=A&cms_map=0).
 
 ## Aufgabe 1
 
-Erstellen sie eine Karte des deutschen Autobahnverlaufs und stellen sie in dieser Karte die Zählstellen anhand ihres Verkehrsaufkommen im Jahr 2022 dar.
+Erstellen Sie eine Karte des deutschen Autobahnnetzes und stellen Sie in dieser Karte die
+Verkehrsbelastungen für das Jahr 2022 dar.
 
 ## Aufgabe 2
 
-Wählen Sie  vier geeignete Zählstellen aus (beispielsweise 4-streifige Autobahn 1, 6-streifige Autobahn 2, Autobahn in Ballungsgebiet, Autobahn im ländlichen Raum) und analysieren Sie diese.
+Wählen Sie zwei Zählstellen von Autobahnen im Ballungsraum und zwei weitere Zählstellen von
+Autobahnen außerhalb eines Ballungsraumes. Führen Sie für die vier Zählstellen folgende Auswertungen durch:
 
-a)  Erstellen sie folgende Tagesganglinien:
+a) Erstellen Sie für jeden Wochentag eine Ganglinie für jede Zählstelle und stellen Sie die Ganglinien grafisch wie folgt dar: ein Liniendiagramm für jeden Wochentag, jedes Diagramm enthält die Ganglinien der vier Zählstellen.
 
--   Ganglinie aller Wochentage einer einzelnen Zählstelle.
+b) Bestimmen Sie die mittlere werktägliche Verkehrsbelastung (mittlere Stundenwerte dienstags bis
+donnerstags, ohne Feiertage und außerhalb der Schulferien) und stellen Sie die Ganglinien "Mittlerer Werktag" für jede Zählstelle in einem Diagramm dar.
 
--   Ganglinie eines durchschnittlichen Werktags aller vier ausgewählten Zählstellen.
+c) Bestimmen Sie die "50. Stunde" der vier Zählstellen und geben das Ergebnis in einer Tabelle aus. Wählen Sie zudem eine geeignete Darstellungsform, um für jede Zählstelle die 50. Stunde im
+Vergleich zu den restlichen Stunden eines Jahres auszugeben.
 
-b)  Stellen sie die Werte der 50. Stunde einer Zählstelle in einer Tabelle dar und wählen Sie eine geeignete Darstellungsform um die Relation der 50. Stunde mit den anderen Topstunden zu vergleichen.
-
-c)  Untersuchen Sie die Entwicklung des prozentualen Anteils des Schwerverkehrs über die Jahre 2003 bis 2018.
-
-
+d) Untersuchen Sie den prozentualen Anteil des Schwerverkehrs in der Zeitspanne 2003 bis 2018.
+Welche Entwicklung / Tendenz lässt sich erkennen?

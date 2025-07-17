@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Aufgaben zur Verkehrsdatenanalyse – a-verkehrsdatenanalyse</title>
+<title>Anwendungsbaustein Analyse von Verkehrsmengen - 1&nbsp; Aufgaben zur Analyse von Verkehrsmengen</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -79,13 +79,13 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../aufgabenstellung/aufgabe_verkehrsdatenanalyse.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Aufgaben zur Verkehrsdatenanalyse</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../aufgabenstellung/aufgabe_verkehrsdatenanalyse.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Aufgaben zur Analyse von Verkehrsmengen</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -100,9 +100,9 @@ ul.task-list li input[type="checkbox"] {
       <img src="../bilder/logo_bcd_new.svg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Anwendungsbaustein Verkehrsdatenanalyse</a> 
+      <a href="../">Anwendungsbaustein Analyse von Verkehrsmengen</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/bausteine-der-datenanalyse/a-verkehrsmengen" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -116,19 +116,19 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Präambel</span></a>
+ <span class="menu-text">Einleitung</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../aufgabenstellung/aufgabe_verkehrsdatenanalyse.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Aufgaben zur Verkehrsdatenanalyse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Aufgaben zur Analyse von Verkehrsmengen</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../musterloesung/musterloesung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Musterlösung Verkehrsdatenanalyse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Musterlösung Analyse von Verkehrsmengen</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -156,14 +156,14 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#aufgabe-1" id="toc-aufgabe-1" class="nav-link active" data-scroll-target="#aufgabe-1"><span class="header-section-number">1.1</span> Aufgabe 1</a></li>
   <li><a href="#aufgabe-2" id="toc-aufgabe-2" class="nav-link" data-scroll-target="#aufgabe-2"><span class="header-section-number">1.2</span> Aufgabe 2</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse/blob/main/aufgabenstellung/aufgabe_verkehrsdatenanalyse.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/bausteine-der-datenanalyse/a-verkehrsmengen/blob/main/aufgabenstellung/aufgabe_verkehrsdatenanalyse.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Aufgaben zur Verkehrsdatenanalyse</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Aufgaben zur Analyse von Verkehrsmengen</span></h1>
 </div>
 
 
@@ -180,24 +180,19 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Für die Bewertung der bestehenden und die Planung der zukünftigen Straßenverkehrsinfrastruktur werden Informationen über das aktuelle sowie Prognosen für das zukünftige Verkehrsaufkommen benötigt. Auf Autobahnen und Bundesstraßen unterhält die Bundesanstalt für Straßenwesen (BAST) dazu Dauerzählstellen. Die gewonnenen Daten werden auch online zur Verfügung gestellt, siehe <a href="https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html">Jahreswerte hier</a> und <a href="https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html?nn=1819490&amp;cms_strTyp=A&amp;cms_map=0">einzelne Zählstellen hier</a>.</p>
+<p>Für die Bewertung der bestehenden und die Planung der zukünftigen Straßenverkehrsinfrastruktur werden Informationen über das aktuelle sowie Prognosen für das zukünftige Verkehrsaufkommen benötigt. Auf Autobahnen und Bundesstraßen unterhält die Bundesanstalt für Straßenwesen (BASt) dazu Dauerzählstellen. Die gewonnenen Daten werden auch online zur Verfügung gestellt, siehe <a href="https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html">Jahreswerte hier</a> und <a href="https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html?nn=1819490&amp;cms_strTyp=A&amp;cms_map=0">einzelne Zählstellen hier</a>.</p>
 <section id="aufgabe-1" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="aufgabe-1"><span class="header-section-number">1.1</span> Aufgabe 1</h2>
-<p>Erstellen sie eine Karte des deutschen Autobahnverlaufs und stellen sie in dieser Karte die Zählstellen anhand ihres Verkehrsaufkommen im Jahr 2022 dar.</p>
+<p>Erstellen Sie eine Karte des deutschen Autobahnnetzes und stellen Sie in dieser Karte die Verkehrsbelastungen für das Jahr 2022 dar.</p>
 </section>
 <section id="aufgabe-2" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="aufgabe-2"><span class="header-section-number">1.2</span> Aufgabe 2</h2>
-<p>Wählen Sie vier geeignete Zählstellen aus (beispielsweise 4-streifige Autobahn 1, 6-streifige Autobahn 2, Autobahn in Ballungsgebiet, Autobahn im ländlichen Raum) und analysieren Sie diese.</p>
+<p>Wählen Sie zwei Zählstellen von Autobahnen im Ballungsraum und zwei weitere Zählstellen von Autobahnen außerhalb eines Ballungsraumes. Führen Sie für die vier Zählstellen folgende Auswertungen durch:</p>
 <ol type="a">
-<li>Erstellen sie folgende Tagesganglinien:</li>
-</ol>
-<ul>
-<li><p>Ganglinie aller Wochentage einer einzelnen Zählstelle.</p></li>
-<li><p>Ganglinie eines durchschnittlichen Werktags aller vier ausgewählten Zählstellen.</p></li>
-</ul>
-<ol start="2" type="a">
-<li><p>Stellen sie die Werte der 50. Stunde einer Zählstelle in einer Tabelle dar und wählen Sie eine geeignete Darstellungsform um die Relation der 50. Stunde mit den anderen Topstunden zu vergleichen.</p></li>
-<li><p>Untersuchen Sie die Entwicklung des prozentualen Anteils des Schwerverkehrs über die Jahre 2003 bis 2018.</p></li>
+<li><p>Erstellen Sie für jeden Wochentag eine Ganglinie für jede Zählstelle und stellen Sie die Ganglinien grafisch wie folgt dar: ein Liniendiagramm für jeden Wochentag, jedes Diagramm enthält die Ganglinien der vier Zählstellen.</p></li>
+<li><p>Bestimmen Sie die mittlere werktägliche Verkehrsbelastung (mittlere Stundenwerte dienstags bis donnerstags, ohne Feiertage und außerhalb der Schulferien) und stellen Sie die Ganglinien “Mittlerer Werktag” für jede Zählstelle in einem Diagramm dar.</p></li>
+<li><p>Bestimmen Sie die “50. Stunde” der vier Zählstellen und geben das Ergebnis in einer Tabelle aus. Wählen Sie zudem eine geeignete Darstellungsform, um für jede Zählstelle die 50. Stunde im Vergleich zu den restlichen Stunden eines Jahres auszugeben.</p></li>
+<li><p>Untersuchen Sie den prozentualen Anteil des Schwerverkehrs in der Zeitspanne 2003 bis 2018. Welche Entwicklung / Tendenz lässt sich erkennen?</p></li>
 </ol>
 
 
@@ -239,7 +234,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -271,47 +277,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -346,11 +312,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -626,13 +588,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Präambel">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Präambel</span>
+      <a href="../index.html" class="pagination-link  aria-label=" einleitung"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Einleitung</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../musterloesung/musterloesung.html" class="pagination-link" aria-label="Musterlösung Verkehrsdatenanalyse">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Musterlösung Verkehrsdatenanalyse</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../musterloesung/musterloesung.html" class="pagination-link" aria-label="<span class='chapter-number'>2</span>&nbsp; <span class='chapter-title'>Musterlösung Analyse von Verkehrsmengen</span>">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Musterlösung Analyse von Verkehrsmengen</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -641,4 +603,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse/blob/main/aufgabenstellung/aufgabe_verkehrsdatenanalyse.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bausteine-der-datenanalyse/a-verkehrsmengen/blob/main/aufgabenstellung/aufgabe_verkehrsdatenanalyse.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li></ul></div></div></div></footer></body></html>

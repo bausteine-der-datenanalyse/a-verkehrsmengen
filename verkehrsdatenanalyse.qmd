@@ -224,7 +224,7 @@ ggplot(data = ZST5116_DTV, aes(x = Stunde, y = avg_KFZ_R1 ,group = Wochentag ,co
  
 ```
 
-#### Mittlerer Werktag von vier Zählstellen
+### Aufgabe 2 b) Mittlerer Werktag von vier Zählstellen
 
 **Für den Einstieg in das Thema beginnen wir mit einer einzelnen Zählstelle. Die Lösung für mehrere Zählstellen befindet sich weiter unten in diesem Abschnitt.**
 
@@ -307,7 +307,7 @@ ggplot(data = data_werktag_mean_all, aes(x = Stunde, y = avg_KFZ_R1, group = Zae
   theme_light()
 ```
 
-### Aufgabe 2 b): 50. Stunde {#sec-50stunde}
+### Aufgabe 2 c): 50. Stunde {#sec-50stunde}
 
 Als einen weiteren wichtigen Kennwert schauen wir uns das Verkehrsaufkommen in der 50. Stunde an. Für eine rein deskriptive Beschreibung der 50. Stunden können wir den Datensatz absteigend sortieren und dann den 50. Wert auswählen. Dazu benutzen wir erneut die `arrange()`-Funktion, dieses Mal aber mit dem Zusatz `desc()`(kurz für englisch *descending* = absteigend). Um eine Reihe anhand der Position auszuwählen, verwenden wir den `slice()`-Befehl. Dies leiten wir nun an die `select()`-Funktion weiter, die es uns ermöglicht anhand des Namens auszuwählen, welche Variablen wir für unsere Darstellung behalten möchten. In diesem Fall wählen wir das Datum (`Datum`), den Wochentag (`Wotag`), die Stunde des Tages (`Stunde`) und den tatsächlichen Verkehrswert (`KFZ_R1`) aus.
 
@@ -362,7 +362,7 @@ ggplot(data = ZST5116_top[1:80, ], aes(x = Nummer,y = KFZ_R1, fill = Nummer == 5
   theme_light()
 ```
 
-### Aufgabe 2 c): Schwerverkehr-Anteile über die Jahre
+### Aufgabe 2 d): Schwerverkehr-Anteile über die Jahre
 
 Nun schauen wir uns, wie wir den Verlauf der Schwerverkehr-Anteile über mehrere Jahre hinweg ansehen können. Dies kann z.B. bei der Beantwortung der Frage helfen, ob durch steigende Globalisierung auch der Anteil am Schwerverkehr steigt.
 

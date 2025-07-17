@@ -1,14 +1,14 @@
-# Präambel {.unnumbered}
+# Einleitung {.unnumbered}
 
 :::: {.border #Lizenz}
 
 ::: {layout="[20, 80]" layout-valign="center"}
 ![](https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png){fig-alt="Symbol des Lizenzhinweises Creative Commons BY"} 
 
-Bausteine Computergestützter Datenanalyse. "Verkehrsdatenanalyse" von Lukas Arnold, 
+Bausteine Computergestützter Datenanalyse. "Analyse von Verkehrsmengen" von Lukas Arnold, 
 Simone Arnold, Florian Bagemihl, Matthias Baitsch, Marc Fehr, Maik Poetzsch und 
 Sebastian Seipel ist lizensiert unter [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de). 
-Das Werk ist abrufbar unter <https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse>. 
+Das Werk ist abrufbar unter <https://github.com/bausteine-der-datenanalyse/a-verkehrsmengen>. 
 Ausgenommen von der Lizenz sind alle Logos Dritter und anders gekennzeichnete Inhalte. 2025
 
 :::
@@ -17,16 +17,16 @@ Zitiervorschlag
 
 Arnold, Lukas, Simone Arnold, Florian Bagemihl, Matthias Baitsch, Marc Fehr, Maik Poetzsch, und 
 Sebastian Seipel. 2025. „Bausteine Computergestützter Datenanalyse. 
-"Anwendungsbaustein Verkehrsdatenalyse“. <https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse>.
+"Anwendungsbaustein Analyse von Verkehrsmengen“. <https://github.com/bausteine-der-datenanalyse/a-verkehrsmengen>.
 
 BibTeX-Vorlage
 
 ```
-@misc{BCD-a-Verkehrsdatenanalyse-2025,
- title={Bausteine Computergestützter Datenanalyse. Anwendungsbaustein Verkehrsdatanalyse},
+@misc{BCD-a-Verkehrsmengen-2025,
+ title={Bausteine Computergestützter Datenanalyse. Anwendungsbaustein Analyse von Verkehrsmengen},
  author={Arnold, Lukas and Arnold, Simone and Florian Bagemihl and Baitsch, Matthias and Fehr, Marc and Poetzsch, Maik and Seipel, Sebastian},
  year={2025},
- url={https://github.com/bausteine-der-datenanalyse/a-verkehrsdatenanalyse}} 
+ url={https://github.com/bausteine-der-datenanalyse/a-verkehrsmengen}} 
 ```
 
 ::::
@@ -39,7 +39,8 @@ Zum erfolgreichen Bearbeiten dieses Anwendungsbausteins benötigen Sie die Inhal
 
 ## Lernziele
 
-Ziel dieses Bausteins ist es, typische Inhalte von verkehrsrelevanten Fragestellungen in grafischer Form mithilfe der Programmiersprache R darzustellen. Dabei lernen Sie wo deutschsprachige Verkehrsdaten gefunden werden können, wie Verkehrsdaten von Dauerzählstellen auf Autobahnen eingelesen und analysiert werden und welche verschiedenen Darstellungsformen sich für bestimmte Datentypen eignen.
+Ziel dieses Bausteines ist es, mit Hilfe der Programmiersprache R Verkehrsmengen, die als CSV-Dateien öffentlich zur Verfügung stehen, auszuwerten und die Ergebnisse in geeigneter Weise
+grafisch darzustellen.
 
 ## Verwendete Datensätze
 

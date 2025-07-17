@@ -1,5 +1,5 @@
 ---
-title: "Musterlösung Verkehrsdatenanalyse"
+title: "Musterlösung Analyse von Verkehrsmengen"
 format: 
   html:
     toc: true
@@ -118,7 +118,7 @@ ggplot(data = ZST5116_DTV, aes(x = Stunde, y = avg_KFZ_R1 ,group = Wochentag ,co
  
 ```
 
-#### Tagesganglinie eines mittleren Werktags von vier Zählstellen
+### b) Tagesganglinien "Mittlerer Werktag"
 
 *Daten einlesen und verarbeiten*
 
@@ -162,7 +162,7 @@ ggplot(data = data_werktag_mean_all, aes(x = Stunde, y = avg_KFZ_R1, group = Zae
   theme_light()
 ```
 
-### b) 50. Stunde
+### c) 50. Stunde
 
 Stunde auswählen:
 
@@ -205,7 +205,7 @@ ggplot(data = ZST5116_top[1:80, ], aes(x = Nummer,y = KFZ_R1, fill = Nummer == 5
   theme_light()
 ```
 
-### c) Schwerverkehr
+### d) Schwerverkehr
 
 Daten einlesen und filtern:
 
