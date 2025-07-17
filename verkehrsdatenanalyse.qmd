@@ -138,7 +138,7 @@ Zuguterletzt fügen wir die tatsächlichen Verkehrsdaten zu unserer Darstellung 
 d_Jawe <- read_csv2("data/Jawe2022.csv", locale = locale(encoding = 'iso-8859-1'))
 ```
 
-Durch `locale = locale(encoding = 'iso-8859-1')` bestimmen wir die Kodierung nach der ISO-Norm 8859-1, damit die Datei auch in anderen Systemen geladen werden kann. Danach müssen wir den Datensatz aufbereiten (siehe \[Referenz\]) und für unseren Zweck relevante Daten filtern (siehe \[Referenz\]). Dazu benötigen wir die ebenfalls online verfügbare [Datensatzbeschreibung der BASt.](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/pdf-dateien/DZ-Abkuerzungen-Beschreibung.pdf?__blob=publicationFile&v=11)
+Durch `locale = locale(encoding = 'iso-8859-1')` bestimmen wir die Kodierung nach der ISO-Norm 8859-1, damit die Datei auch in anderen Systemen geladen werden kann. Danach müssen wir den Datensatz aufbereiten (siehe \[Referenz\]) und für unseren Zweck relevante Daten filtern (siehe \[Referenz\]). Dazu benötigen wir die ebenfalls online verfügbare [Datensatzbeschreibung der BASt.](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/pdf-dateien/datensatzbeschreibung-Stundendaten.pdf?__blob=publicationFile&v=4)
 
 Dort sehen wir, dass die Variable `Str_Kl` die Straßenklasse beschreibt. Diese Variable hat die Ausprägungen "A" für Autobahnen und "B" für Bundesstraßen. In unserem Fall interessieren uns nur die Daten für Autobahnen, also die Ausprägung "A". Dies können wir mit `filter(Str_Kl == "A")` erreichen.
 
@@ -285,6 +285,7 @@ all_data$Wotag <- factor(all_data$Wotag,
 ```
 
 ```{r}
+#| warning: false
 data_werktag_all <- all_data |>
   filter(Fahrtzw == "w", Wotag %in% c("Di", "Mi", "Do"))
 
@@ -300,6 +301,53 @@ ggplot(data = data_werktag_mean_all, aes(x = Stunde, y = avg_KFZ_R1, group = Zae
   geom_point(size = 2) +
   geom_line(linewidth = 1) +
   labs(title = "Verkehrsaufkommen mittlerer Werktage aller Zählstellen",
+       x = "Stunde",
+       y = "KFZ_R1",
+       color = "Wotag") +
+  scale_color_viridis_d() +
+  theme_light()
+```
+
+Analog zu den Werktagen filtern wir unsere Daten nun für Samstage.Für die Sonntage ist ein Blick in die Datensatzbeschreiben (siehe oben) hilfreich. In den Daten werden Sonn- und Feiertage gemeinsam aufgeführt, sodass wir unseren Filter dort nicht anwenden können.
+
+```{r}
+#Samstag
+data_samstag_all <- all_data |>
+  filter(Fahrtzw == "w", Wotag == "Sa")
+
+data_samstag_mean_all <- data_samstag_all |>
+  group_by(Stunde, Zaehlstelle) |>
+  summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
+
+#Sonntag
+data_sonntag_all <- all_data |>
+  filter(Wotag == "So")
+
+data_sonntag_mean_all <- data_sonntag_all |>
+  group_by(Stunde, Zaehlstelle) |>
+  summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
+```
+
+Plot für Samstage:
+```{r}
+ggplot(data = data_samstag_mean_all, aes(x = Stunde, y = avg_KFZ_R1, group = Zaehlstelle, color = Zaehlstelle)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Verkehrsaufkommen an Samstagen aller Zählstellen",
+       x = "Stunde",
+       y = "KFZ_R1",
+       color = "Wotag") +
+  scale_color_viridis_d() +
+  theme_light()
+```
+
+Plot für Sonntage:
+
+```{r}
+ggplot(data = data_sonntag_mean_all, aes(x = Stunde, y = avg_KFZ_R1, group = Zaehlstelle, color = Zaehlstelle)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Verkehrsaufkommen an Sonntagen aller Zählstellen",
        x = "Stunde",
        y = "KFZ_R1",
        color = "Wotag") +
