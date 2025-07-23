@@ -22,7 +22,7 @@ Autobahnen außerhalb eines Ballungsraumes. Führen Sie für die vier Zählstell
 a) Erstellen Sie für jeden Wochentag eine Ganglinie für eine ausgewählte Zählstelle und stellen Sie diese in einem Diagramm dar.
 
 b) Bestimmen Sie die mittlere werktägliche Verkehrsbelastung (mittlere Stundenwerte dienstags bis
-donnerstags, ohne Feiertage und außerhalb der Schulferien) und stellen Sie die Ganglinien "Mittlerer Werktag" für jede Zählstelle in einem Diagramm dar. Erstellen Sie mit denselben Filtern (ohne Feiertage und außerhalb der Schulferien) für jede Zählstelle ein Diagramm für Samstage. und ein Diagramm für Sonntage.
+donnerstags, ohne Feiertage und außerhalb der Schulferien) und stellen Sie die Ganglinien "Mittlerer Werktag" für jede Zählstelle in einem Diagramm dar. Erstellen Sie mit denselben Filtern (ohne Feiertage und außerhalb der Schulferien) für jede Zählstelle ein Diagramm für Samstage und Sonntage
 
 c) Bestimmen Sie die "50. Stunde" der vier Zählstellen und geben das Ergebnis in einer Tabelle aus. Wählen Sie zudem eine geeignete Darstellungsform, um für jede Zählstelle die 50. Stunde im
 Vergleich zu den restlichen Stunden eines Jahres auszugeben.

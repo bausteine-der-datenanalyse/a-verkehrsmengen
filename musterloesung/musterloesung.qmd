@@ -141,20 +141,68 @@ all_data$Wotag <- factor(all_data$Wotag,
 ```
 
 ```{{r}}
+#Werktag
 data_werktag_all <- all_data |>
   filter(Fahrtzw == "w", Wotag %in% c("Di", "Mi", "Do"))
 
 data_werktag_mean_all <- data_werktag_all |>
   group_by(Stunde, Zaehlstelle) |>
   summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
+  
+#Samstag
+data_samstag_all <- all_data |>
+  filter(Fahrtzw == "w", Wotag == "Sa")
+
+data_samstag_mean_all <- data_samstag_all |>
+  group_by(Stunde, Zaehlstelle) |>
+  summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
+
+#Sonntag
+data_sonntag_all <- all_data |>
+  filter(Wotag == "So")
+
+data_sonntag_mean_all <- data_sonntag_all |>
+  group_by(Stunde, Zaehlstelle) |>
+  summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
 ```
 
 *Plotten*
+
+Plot für Werktage:
+
 ```{{r}}
 ggplot(data = data_werktag_mean_all, aes(x = Stunde, y = avg_KFZ_R1, group = Zaehlstelle, color = Zaehlstelle)) +
   geom_point(size = 2) +
   geom_line(linewidth = 1) +
   labs(title = "Verkehrsaufkommen mittlerer Werktage aller Zählstellen",
+       x = "Stunde",
+       y = "KFZ_R1",
+       color = "Wotag") +
+  scale_color_viridis_d() +
+  theme_light()
+```
+
+Plot für Samstage:
+
+```{{r}}
+ggplot(data = data_samstag_mean_all, aes(x = Stunde, y = avg_KFZ_R1, group = Zaehlstelle, color = Zaehlstelle)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Verkehrsaufkommen an Samstagen aller Zählstellen",
+       x = "Stunde",
+       y = "KFZ_R1",
+       color = "Wotag") +
+  scale_color_viridis_d() +
+  theme_light()
+```
+
+Plot für Sonntage:
+
+```{{r}}
+ggplot(data = data_sonntag_mean_all, aes(x = Stunde, y = avg_KFZ_R1, group = Zaehlstelle, color = Zaehlstelle)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Verkehrsaufkommen an Sonntagen aller Zählstellen",
        x = "Stunde",
        y = "KFZ_R1",
        color = "Wotag") +
