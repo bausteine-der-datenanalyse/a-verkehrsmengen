@@ -130,7 +130,7 @@ ggplot() +
 
 ### Zählstellendaten {#sec-zählstellendaten}
 
-Zuguterletzt fügen wir die tatsächlichen Verkehrsdaten zu unserer Darstellung hinzu. Wir verwenden hier die Daten von Dauerzählstellen auf Autobahnen, die die Bundesanstalt für Straßenwesen (BASt) [online](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html) zur Verfügung stellt. Die heruntergeladene CSV-Datei importieren wir mithilfe der `read_csv2()`-Funktion des Pakets `readr` aus der Paketsammlung `tidyverse`.
+Zuguterletzt fügen wir die tatsächlichen Verkehrsdaten zu unserer Darstellung hinzu. Wir verwenden hier die Daten von Dauerzählstellen auf Autobahnen für das Jahr 2022, die die Bundesanstalt für Straßenwesen (BASt) [online](https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v2-verkehrszaehlung/Daten/2022_1/Jawe2022.html) zur Verfügung stellt. Die heruntergeladene CSV-Datei importieren wir mithilfe der `read_csv2()`-Funktion des Pakets `readr` aus der Paketsammlung `tidyverse`.
 
 ```{r}
 #| warning: false

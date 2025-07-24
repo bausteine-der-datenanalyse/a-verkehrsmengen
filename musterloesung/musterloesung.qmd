@@ -51,7 +51,7 @@ if (!file.exists("data/d_bab.RData")) {
 }
 ```
 
-Zählstellendaten für 2022:
+Für das wählbare Jahr wurden hier die Zählstellendaten von 2022 verwendet:
 
 ```{{r}}
 #| warning: false
