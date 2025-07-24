@@ -243,6 +243,8 @@ data_werktag <- ZST5116 |>
 data_werktag_mean <- data_werktag |>
   group_by(Stunde) |>
   summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
+
+data_werktag_mean$Anteil = (data_werktag_mean$avg_KFZ_R1/sum(data_werktag_mean$avg_KFZ_R1)*100)
 ```
 
 Diese Daten können wir nun analog zum ersten Teil dieser Aufgabe plotten:
@@ -253,7 +255,19 @@ ggplot(data = data_werktag_mean, aes(x = Stunde, y = avg_KFZ_R1, group = 1)) +
   geom_line(linewidth = 1) +
   labs(title = "Verkehrsaufkommen mittlerer Werktage Zählstelle 5116 R1",
        x = "Stunde",
-       y = "KFZ_R1") +
+       y = "KFZ_R1 in KFZ pro Stunde") +
+  theme_light()
+```
+
+Um Ein Verständnis zu bekommen wie groß der Anteil der jeweiligen Stunde am Verkehrsaufkommen ist, können wir dies ebenfalls plotten:
+
+```{r}
+ggplot(data = data_werktag_mean, aes(x = Stunde, y = Anteil, group = 1)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Verkehrsaufkommen mittlerer Werktage Zählstelle 5116 R1",
+       x = "Stunde",
+       y = "Prozentualer Anteil") +
   theme_light()
 ```
 
