@@ -114,8 +114,8 @@ ggplot(data = ZST5116_DTV, aes(x = Stunde, y = avg_KFZ_R1 ,group = Wochentag ,co
        y = "Verkehrsaufkommen Richtung 1 in Kfz/h",
        color = "Wochentag",
       shape = "Wochentag") +
+  scale_color_viridis_d() +
   theme_light()
- 
 ```
 
 ### b) Tagesganglinien "Mittlerer Werktag"

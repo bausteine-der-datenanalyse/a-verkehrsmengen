@@ -221,7 +221,6 @@ ggplot(data = ZST5116_DTV, aes(x = Stunde, y = avg_KFZ_R1 ,group = Wochentag ,co
       shape = "Wochentag") +
   scale_color_viridis_d() +
   theme_light()
- 
 ```
 
 ### Aufgabe 2 b) Mittlerer Werktag von vier Zählstellen
