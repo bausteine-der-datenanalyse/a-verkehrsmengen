@@ -120,7 +120,51 @@ ggplot(data = ZST5116_DTV, aes(x = Stunde, y = avg_KFZ_R1 ,group = Wochentag ,co
 
 ### b) Tagesganglinien "Mittlerer Werktag"
 
-*Daten einlesen und verarbeiten*
+*Exemplarische Beispiele einer Zählstelle*
+
+```{{r}}
+#| warning: false
+
+ZST5116$Wotag <- factor(ZST5116$Wotag,
+ levels = c(1,2,3,4,5,6,7),
+ labels = c("Mo","Di","Mi","Do","Fr","Sa","So"))
+
+
+data_werktag <- ZST5116 |>
+  filter(Fahrtzw == "w", Wotag %in% c("Di", "Mi", "Do"))
+
+data_werktag_mean <- data_werktag |>
+  group_by(Stunde) |>
+  summarise(avg_KFZ_R1 = mean(KFZ_R1),avg_KFZ_R2 = mean(KFZ_R2))
+
+data_werktag_mean$Anteil = (data_werktag_mean$avg_KFZ_R1/sum(data_werktag_mean$avg_KFZ_R1)*100)
+```
+
+Plot für Verkehrsaufkommen:
+
+```{{r}}
+ggplot(data = data_werktag_mean, aes(x = Stunde, y = avg_KFZ_R1, group = 1)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Verkehrsaufkommen mittlerer Werktage Zählstelle 5116 R1",
+       x = "Stunde",
+       y = "KFZ_R1 in KFZ pro Stunde") +
+  theme_light()
+```
+
+Plot für Anteile:
+
+```{{r}}
+ggplot(data = data_werktag_mean, aes(x = Stunde, y = Anteil, group = 1)) +
+  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  labs(title = "Verkehrsaufkommen mittlerer Werktage Zählstelle 5116 R1",
+       x = "Stunde",
+       y = "Prozentualer Anteil") +
+  theme_light()
+```
+
+*Mehrere Daten einlesen und verarbeiten*
 
 ```{{r}}
 #| warning: false
