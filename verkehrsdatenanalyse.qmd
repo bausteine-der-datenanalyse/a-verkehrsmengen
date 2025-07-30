@@ -434,8 +434,6 @@ Um mehrere Dateien gleichzeitig einzulesen, bietet es sich an eine `function` zu
 ```{r}
 #| warning: false
 
-#Notiz für Matthias: Das hier ist eine frühe, nicht sonderlich gute Lösung, die ich aber noch behalte, bis ich mir überlegt habe wie ich die Erläuterung von Funktionen und Schleifen implementiere. Am ungeschicktesten ist das Benötigen des Extra-Ordners da momentan einfach nur nach csv-Dateien gefiltert wird.
-
 list_of_files <- list.files(path = "data_jw",
                             recursive = TRUE,
                             pattern = "\\.csv$",
