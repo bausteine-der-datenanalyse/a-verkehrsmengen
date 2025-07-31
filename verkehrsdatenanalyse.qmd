@@ -429,7 +429,7 @@ Nun schauen wir uns, wie wir den Verlauf der Schwerverkehr-Anteile über mehrere
 
 Um mehrere Dateien gleichzeitig einzulesen, bietet es sich an eine `function` zu verwenden, damit dieser Schritt in einem Durchlauf erledigt wird und man mögliche Fehler beim Kopieren und Einfügen vermeidet.
 
-**TO-DO**: Erläuterungen
+Leider besitzt der Datensatz der Zählstellen keine Variable wie `Jahr` anhand derer wir die Identifikation herstellen können. Allerdings besitzen die Dateinamen eine Jahreszugehörigkeit. Daher verwenden wir die Namen der Zählstellendateien als Identifikation und benennen diese Variable mit `id = "Jahr"` als Jahr. Nun müssen wir die anderen Elemente des Strings aus den Dateinamen mit `str_remove_all` entfernen. Am Schluss wandeln wir den String des Dateinamens, der nun nur noch die Jahreszahl enthält mit `as_numeric` in eine Zahl um.
 
 ```{r}
 #| warning: false
@@ -452,11 +452,12 @@ df_schwer <- df_NA |>
   summarise(SV = sum(DTV_SV_MobisSo_Q),Alle = sum(DTV_Kfz_MobisSo_Q),Anteil = (SV/Alle)*100)
 ```
 
+Diesen nun angepassten Datensatz können wir nun ähnlich wie in #sec-50stunde verwenden, um mit `ggplot` ein Balkendiagramm zu erstellen. Damit für jedes Jahr ein Balken erzeugt wirkt, setzen wir manuell die Skala auf der X-Achse mit `scale_x_continuous` und stellen diese mit `breaks=seq(2003,2018,1)` so ein, dass für 2003 bis 2018 ein Abschnitt (engl. *break*) erstellt wird.
+
 ```{r}
 ggplot(data = df_schwer, aes(x = Jahr, y = Anteil)) +
   geom_bar(stat='identity', fill = "blue") +
-  labs(x = "Jahr", y = "Anteil am gesamten Verkehrsaufkommen") +
-  ggtitle("Anteil des Schwerverkehrs von 2003 bis 2018 in 1000") +
+  labs(title ="Anteil des Schwerverkehrs von 2003 bis 2018", x = "Jahr", y = "Anteil am gesamten Verkehrsaufkommen") +
   scale_x_continuous(breaks=seq(2003,2018,1)) +
  theme_light()
 
