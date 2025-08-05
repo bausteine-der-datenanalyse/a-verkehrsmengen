@@ -281,8 +281,28 @@ ZST5116_top <- ZST5116 |>
 ZST5116_top$Nummer = 1:nrow(ZST5116_top)
 ```
 
+Plotten mit 80 höchsten Datenpunkten für bessere Lesbarkeit:
+
 ```{{r}}
 ggplot(data = ZST5116_top[1:80, ], aes(x = Nummer,y = KFZ_R1, fill = Nummer == 50, width = .65)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Verkehrsaufkommen pro Stunde Zählstelle 5116 Richtung 1",
+       x = "Sortierte Topstunde",
+       y = "Verkehrsaufkommen in Kfz/h",
+       legend = "Wochentag") +
+  scale_fill_manual(values = c("grey", "red"), guide = "none") +
+  geom_label(
+    data = filter(ZST5116_top,Nummer == 50), 
+    mapping = aes(label = KFZ_R1),
+    nudge_y = 200, size = 4.5, alpha = 0.5
+  ) +
+  theme_light()
+```
+
+Plotten mit allen Datenpunkten:
+
+```{{r}}
+ggplot(data = ZST5116_top, aes(x = Nummer,y = KFZ_R1, fill = Nummer == 50, width = .65)) +
   geom_bar(stat = "identity") +
   labs(title = "Verkehrsaufkommen pro Stunde Zählstelle 5116 Richtung 1",
        x = "Sortierte Topstunde",

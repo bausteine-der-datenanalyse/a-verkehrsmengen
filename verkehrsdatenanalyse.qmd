@@ -423,6 +423,24 @@ ggplot(data = ZST5116_top[1:80, ], aes(x = Nummer,y = KFZ_R1, fill = Nummer == 5
   theme_light()
 ```
 
+Um einen Vergleich mit dem gesamten Verkehrsaufkommen zu erstellen, folgt nun dieses Balkendiagramm mit den Daten aller Stunden:
+
+```{r}
+ggplot(data = ZST5116_top, aes(x = Nummer,y = KFZ_R1, fill = Nummer == 50, width = .65)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Verkehrsaufkommen pro Stunde Zählstelle 5116 Richtung 1",
+       x = "Sortierte Topstunde",
+       y = "Verkehrsaufkommen in Kfz/h",
+       legend = "Wochentag") +
+  scale_fill_manual(values = c("grey", "red"), guide = "none") +
+  geom_label(
+    data = filter(ZST5116_top,Nummer == 50), 
+    mapping = aes(label = KFZ_R1),
+    nudge_y = 200, size = 4.5, alpha = 0.5
+  ) +
+  theme_light()
+```
+
 ### Aufgabe 2 d): Schwerverkehr-Anteile über die Jahre
 
 Nun schauen wir uns, wie wir den Verlauf der Schwerverkehr-Anteile über mehrere Jahre hinweg ansehen können. Dies kann z.B. bei der Beantwortung der Frage helfen, ob durch steigende Globalisierung auch der Anteil am Schwerverkehr steigt.
