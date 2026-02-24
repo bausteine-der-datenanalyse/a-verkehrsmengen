@@ -15,3 +15,5 @@ daten/geo
 daten/Daten-BISStra.zip
 
 **/*.quarto_ipynb
+
+weitere_beispiele.qmd
