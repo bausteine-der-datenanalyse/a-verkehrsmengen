@@ -1,7 +1,17 @@
+/.quarto/
 
+.RData*
 .Rhistory
 .Rproj.user
-*.Rproj
 
-/.quarto/
-/verkehrsdatenanalyse_files
+_output
+*_cache
+*_files
+*.quarto_ipynb
+
+tmp*.tex
+daten/unfaelle.RData
+daten/geo
+daten/Daten-BISStra.zip
+
+**/*.quarto_ipynb

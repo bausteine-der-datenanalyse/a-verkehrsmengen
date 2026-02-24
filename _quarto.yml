@@ -1,6 +1,11 @@
+lang: de-DE
+
 project:
   type: book
-  output-dir: output/book/
+  output-dir: _output/book/
+
+execute:
+  cache: true
 
 book:
   title: "Anwendungsbaustein Analyse von Verkehrsmengen"
@@ -10,28 +15,29 @@ book:
     - Florian Bagemihl
     - Matthias Baitsch
     - Marc Fehr
+    - Franca Hollmann
     - Maik Poetzsch
     - Sebastian Seipel
   date: today
-  language: de-DE
   repo-url: "https://github.com/bausteine-der-datenanalyse/a-verkehrsmengen"
   repo-actions: [source]
   favicon: "bilder/favicon_bcd_new.svg"
   sidebar:
-    title: "Anwendungsbaustein Analyse von Verkehrsmengen"
+    title: "Anwendungsbaustein Verkehrsmengen"
     logo: "bilder/logo_bcd_new.svg"
-  chapters:
+  chapters: 
     - index.qmd
-    - aufgabenstellung/aufgabe_verkehrsdatenanalyse.qmd
-    - musterloesung/musterloesung.qmd
-    - verkehrsdatenanalyse.qmd
-    - weitere_beispiele.qmd
+    - aufgabenstellung.qmd
+    - musterloesung.qmd
+  downloads: 
+    - pdf
 
 format:
   html:
     theme: cosmo
     lang: de
     toc: true
-    toc-depth: 3
-
-
+    toc-depth: 4
+    format-links: 
+      - pdf
+  pdf: default
