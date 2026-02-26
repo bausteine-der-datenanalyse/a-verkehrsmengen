@@ -2,7 +2,7 @@ lang: de-DE
 
 project:
   type: book
-  output-dir: _output/book/
+  output-dir: _output
 
 execute:
   cache: true

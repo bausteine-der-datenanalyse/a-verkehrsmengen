@@ -13,14 +13,12 @@ Dieser Abschnitt befindet sich noch in der Konstruktion.
 
 ```{r}
 #| include: false
-library(ggplot2)
-library(tidyverse)
-library(lubridate)
-library(readxl)
-library(kableExtra)
 library(sf)
-library(osmdata)
 library(giscoR)
+library(readxl)
+library(osmdata)
+library(tidyverse)
+library(kableExtra)
 ```
 
 ## Über alle Tage {#sec-alle-tage}

@@ -2,16 +2,13 @@
 
 ```{r}
 #| include: false
-library(ggplot2)
-library(tidyverse)
-library(lubridate)
-library(readxl)
-library(kableExtra)
 library(sf)
-library(osmdata)
-library(giscoR)
 library(curl)
-library(readr)
+library(giscoR)
+library(readxl)
+library(osmdata)
+library(tidyverse)
+library(kableExtra)
 ```
 
 ## Aufgabe 1.1 : Deutschlandkarte mit Zählstellendaten
