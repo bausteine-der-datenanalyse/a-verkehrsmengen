@@ -43,10 +43,9 @@ Diesen laden wir ins Projekt. Das Bundesfernstraßennetz beinhaltet Daten zu Bun
 ```{r}
 #| warning: false
 
-file_bfstn <- "daten/bfstn.RData"
-
-if (!file.exists(file_bfstn)) {
-  file_gpkg <- list.files("daten/geo", pattern = "^BFStr_Netz.*\\.gpkg$", full.names = TRUE) |>
+if (!file.exists("daten/bfstn.RData")) {
+  file_gpkg <- list.files("daten/geo", pattern = "^BFStr_Netz.*\\.gpkg$", 
+                          full.names = TRUE) |>
     tail(n = 1)
 
   if (length(file_gpkg) == 0) {
@@ -56,7 +55,9 @@ if (!file.exists(file_bfstn)) {
       quiet = FALSE
     )
     unzip("daten/geo/Daten-BISStra.zip", exdir = "daten/geo/")
-    file_gpkg <- list.files("daten/geo", pattern = "^BFStr_Netz.*\\.gpkg$", full.names = TRUE) |>
+    file_gpkg <- list.files("daten/geo", 
+                            pattern = "^BFStr_Netz.*\\.gpkg$", 
+                            full.names = TRUE) |>
       tail(n = 1)
   }
 
@@ -65,9 +66,9 @@ if (!file.exists(file_bfstn)) {
     mutate(rownumber = row_number()) |>
     st_zm()
 
-  save(d_bfstn, file = file_bfstn)
+  save(d_bfstn, file = "daten/bfstn.RData")
 } else {
-  load(file_bfstn)
+  load("daten/bfstn.RData")
 }
 
 ```
@@ -81,7 +82,8 @@ Wir filtern nach der Straßenklasse "A" für Autobahn und nach allen Dauerzähls
 ```{r}
 #| warning: false
 
-d_dzs_2023 <- read_csv2("daten/Jawe2023.csv", locale = locale(encoding = 'iso-8859-1')) |>
+d_dzs_2023 <- read_csv2("daten/Jawe2023.csv", 
+                        locale = locale(encoding = 'iso-8859-1')) |>
   filter(Str_Kl == "A") |>
   drop_na(DTV_Kfz_MobisSo_Q) |>
   arrange(DTV_Kfz_MobisSo_Q)
@@ -97,7 +99,12 @@ Für Barrierefreiheit nutzen wir die Farbpalette `scale_color_distiller`. Mit `t
 ggplot() +
   geom_sf(data = d_de, fill = NA, size = 0.5) +
   geom_sf(data = d_bfstn,  size = 0.35, show.legend = FALSE) +
-  geom_point(data = d_dzs_2023, mapping = aes(x = Koor_WGS84_E, y = Koor_WGS84_N, color = DTV_Kfz_MobisSo_Q), size = 1.5, na.rm = FALSE) + 
+  geom_point(data = d_dzs_2023, 
+             mapping = aes(
+              x = Koor_WGS84_E, 
+              y = Koor_WGS84_N, 
+              color = DTV_Kfz_MobisSo_Q),
+             size = 1.5, na.rm = FALSE) + 
   scale_color_distiller(palette = 8 , direction = 1) +
   theme_void() +
   ggtitle("Verkehrsaufkommen auf deutschen Autobahnen im Jahr 2023") +
@@ -112,7 +119,8 @@ Exemplarisch verwenden wir hier die Zählstelle 5116 der A42 in Wanne-Eickel. Di
 
 ```{r}
 #| warning: false
-d_zst5116 <- read_csv2("daten/zst5116_2023.csv", locale = locale(encoding = 'iso-8859-1'))
+d_zst5116 <- read_csv2("daten/zst5116_2023.csv",
+                       locale = locale(encoding = 'iso-8859-1'))
 ```
 
 ### Tagesganglinien
@@ -144,7 +152,13 @@ Mit `theme_light()` verwenden wir ein vorgefertigtes Thema, um die Darstellungsf
 ```{r}
 #| warning: false
 
-ggplot(data = d_zst5116_dtv, aes(x = Stunde, y = avg_KFZ_R1 ,group = Wochentag ,color = factor(Wochentag), shape = Wochentag)) +
+ggplot(data = d_zst5116_dtv, 
+       aes(
+         x = Stunde, 
+         y = avg_KFZ_R1, 
+         group = Wochentag, 
+         color = factor(Wochentag), 
+         shape = Wochentag)) +
   geom_point(size = 2) +
   geom_line(linewidth = 1) +
   labs(title = "Tagesganglinien Zählstelle 5116 Richtung 1",
@@ -177,7 +191,8 @@ Diese Daten können wir nun analog zum ersten Teil dieser Aufgabe plotten:
 ggplot(data = d_zst5116_w, aes(x = Stunde, y = avg_KFZ_R1, group = 1)) +
   geom_point(size = 2) +
   geom_line(linewidth = 1) +
-  labs(title = "Verkehrsaufkommen eines mittleren Werktages an der Zählstelle 5116",
+  labs(title = "Verkehrsaufkommen eines mittleren 
+       Werktages an der Zählstelle 5116",
        x = "Stunde",
        y = "Verkehrsaufkommen in Richtung 1 in Kfz/h") +
   theme_light()
@@ -189,7 +204,8 @@ Um ein besseres Verständnis zu bekommen, wie groß der Anteil der jeweiligen St
 ggplot(data = d_zst5116_w, aes(x = Stunde, y = anteil_R1, group = 1)) +
   geom_point(size = 2) +
   geom_line(linewidth = 1) +
-  labs(title = "Verkehrsaufkommen eines mittleren Werktages an der Zählstelle 5116",
+  labs(title = "Verkehrsaufkommen eines mittleren 
+       Werktages an der Zählstelle 5116",
        x = "Stunde",
        y = "Prozentualer Anteil am Tagesverkehrsaufkommen in R 1") +
   theme_light()
@@ -200,9 +216,12 @@ Die Zählstellen 5116 (A42, Wanne-Eickel) und 5033 (A3, Leverkusen) in einem Bal
 
 ```{r}
 #| warning: false
-d_zst5033 <- read_csv2("daten/zst5033_2023.csv", locale = locale(encoding = 'iso-8859-1'))
-d_zst5117 <- read_csv2("daten/zst5117_2023.csv", locale = locale(encoding = 'iso-8859-1'))
-d_zst5136 <- read_csv2("daten/zst5136_2023.csv", locale = locale(encoding = 'iso-8859-1'))
+d_zst5033 <- read_csv2("daten/zst5033_2023.csv", 
+                       locale = locale(encoding = 'iso-8859-1'))
+d_zst5117 <- read_csv2("daten/zst5117_2023.csv", 
+                       locale = locale(encoding = 'iso-8859-1'))
+d_zst5136 <- read_csv2("daten/zst5136_2023.csv", 
+                       locale = locale(encoding = 'iso-8859-1'))
 ```
 
 ::: {.callout-tip title="Mit Funktionen mehrere Datensätze einlesen"}
@@ -238,10 +257,16 @@ d_zst_alle_w <- d_zst_alle |>
 Wenn wir diese gefilterten Daten darstellen, erhalten wir folgenden Plot: 
 
 ```{r}
-ggplot(data = d_zst_alle_w, aes(x = Stunde, y = avg_KFZ_R1, group = zaehlstelle, color = zaehlstelle)) +
+ggplot(data = d_zst_alle_w, 
+       aes(
+         x = Stunde, 
+         y = avg_KFZ_R1, 
+         group = zaehlstelle, 
+         color = zaehlstelle)) +
   geom_point(size = 2) +
   geom_line(linewidth = 1) +
-  labs(title = "Verkehrsaufkommen eines mittleren Werktages aller Zählstellen",
+  labs(title = "Verkehrsaufkommen eines mittleren 
+       Werktages aller Zählstellen",
        x = "Stunde",
        y = "Verkehrsaufkommen in Richtung 1 in Kfz/h",
        color = "Ort der Zählstelle") +
@@ -275,7 +300,12 @@ d_zst_alle_so <- d_zst_alle |>
 
 Plot für Samstage:
 ```{r}
-ggplot(data = d_zst_alle_sa, aes(x = Stunde, y = avg_KFZ_R1, group = zaehlstelle, color = zaehlstelle)) +
+ggplot(data = d_zst_alle_sa, 
+       aes(
+         x = Stunde, 
+         y = avg_KFZ_R1, 
+         group = zaehlstelle, 
+         color = zaehlstelle)) +
   geom_point(size = 2) +
   geom_line(linewidth = 1) +
   labs(title = "Verkehrsaufkommen an Samstagen aller Zählstellen",
@@ -289,10 +319,15 @@ ggplot(data = d_zst_alle_sa, aes(x = Stunde, y = avg_KFZ_R1, group = zaehlstelle
 Plot für Sonntage:
 
 ```{r}
-ggplot(data = d_zst_alle_so, aes(x = Stunde, y = avg_KFZ_R1, group = zaehlstelle, color = zaehlstelle)) +
+ggplot(data = d_zst_alle_so, 
+       aes(
+         x = Stunde, 
+         y = avg_KFZ_R1, 
+         group = zaehlstelle, 
+         color = zaehlstelle)) +
   geom_point(size = 2) +
   geom_line(linewidth = 1) +
-  labs(title = "Verkehrsaufkommen an Samstagen aller Zählstellen",
+  labs(title = "Verkehrsaufkommen an Sonntagen aller Zählstellen",
        x = "Stunde",
        y = "Verkehrsaufkommen in Richtung 1 in Kfz/h",
        color = "Ort der Zählstelle") +
@@ -338,7 +373,12 @@ Das Label wird mithilfe der Funktion `geom_label`, die analog zu bereits bekannt
 -   `alpha` stellt die Transparenz ein.
 
 ```{r}
-ggplot(data = d_zst5116_top[1:80, ], aes(x = nummer,y = KFZ_R1, fill = nummer == 50, width = .65)) +
+ggplot(data = d_zst5116_top[1:80, ], 
+       aes(
+         x = nummer, 
+         y = KFZ_R1, 
+         fill = nummer == 50, 
+         width = .65)) +
   geom_bar(stat = "identity") +
   labs(title = "Verkehrsaufkommen pro Stunde Zählstelle 5116 Richtung 1",
        x = "Sortierte Topstunde",
@@ -355,7 +395,12 @@ ggplot(data = d_zst5116_top[1:80, ], aes(x = nummer,y = KFZ_R1, fill = nummer ==
 Um einen Vergleich mit dem gesamten Verkehrsaufkommen zu erstellen, folgt nun dieses Balkendiagramm mit den Daten aller Stunden:
 
 ```{r}
-ggplot(data = d_zst5116_top, aes(x = nummer,y = KFZ_R1, fill = nummer == 50, width = .65)) +
+ggplot(data = d_zst5116_top, 
+       aes(
+         x = nummer, 
+         y = KFZ_R1, 
+         fill = nummer == 50, 
+         width = .65)) +
   geom_bar(stat = "identity") +
   labs(title = "Verkehrsaufkommen pro Stunde Zählstelle 5116 Richtung 1",
        x = "Sortierte Topstunde",
@@ -385,7 +430,8 @@ dateien <- list.files(path = "daten",
                       recursive = TRUE,
                       full.names = TRUE)
 
-daten <- read_csv2(dateien, id = "Jahr", locale = locale(encoding = "iso-8859-1")) |>
+daten <- read_csv2(dateien, id = "Jahr", 
+                   locale = locale(encoding = "iso-8859-1")) |>
   filter(Str_Kl == "A") |>
   mutate(jahr = as.numeric(str_extract(Jahr, "\\d+"))) |>
   filter(DTV_Kfz_MobisSo_Q != 'NA' & DTV_SV_MobisSo_Q != 'NA') 
@@ -405,7 +451,9 @@ Diesen nun angepassten Datensatz können wir nun ähnlich wie in #sec-50stunde v
 ```{r}
 ggplot(data = daten_sv, aes(x = jahr, y = anteil)) +
   geom_bar(stat='identity', fill = "blue") +
-  labs(title ="Anteil des Schwerverkehrs auf Autobahnen von 2003 bis 2023", x = "Jahr", y = "Anteil am gesamten Verkehrsaufkommen in Prozent") +
+  labs(title ="Anteil des Schwerverkehrs auf Autobahnen von 2003 bis 2023", 
+       x = "Jahr", 
+       y = "Anteil am gesamten Verkehrsaufkommen in Prozent") +
   scale_x_continuous(breaks=seq(2003, 2023, 5)) +
  theme_light()
 
